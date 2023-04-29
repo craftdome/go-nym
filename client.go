@@ -32,6 +32,7 @@ func (c *Client) Dial() (err error) {
 }
 
 func (c *Client) ListenAndServe() {
+	defer close(c.messages)
 	for {
 		messageType, r, err := c.conn.NextReader()
 		if err == net.ErrClosed {
@@ -39,6 +40,9 @@ func (c *Client) ListenAndServe() {
 			break
 		} else if err != nil {
 			fmt.Fprintln(os.Stderr, errors.Wrapf(err, "conn.NextReader, messageType=%d", messageType))
+			if messageType == -1 {
+				break
+			}
 			continue
 		}
 
