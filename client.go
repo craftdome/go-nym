@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
-	"net"
 	"os"
+	"time"
 )
 
 type Client struct {
@@ -31,19 +31,12 @@ func (c *Client) Dial() (err error) {
 	return nil
 }
 
-func (c *Client) ListenAndServe() {
+func (c *Client) ListenAndServe() error {
 	defer close(c.messages)
 	for {
 		messageType, r, err := c.conn.NextReader()
-		if err == net.ErrClosed {
-			fmt.Fprintln(os.Stderr, err)
-			break
-		} else if err != nil {
-			fmt.Fprintln(os.Stderr, errors.Wrapf(err, "conn.NextReader, messageType=%d", messageType))
-			if messageType == -1 {
-				break
-			}
-			continue
+		if err != nil {
+			return err
 		}
 
 		switch messageType {
@@ -63,7 +56,10 @@ func (c *Client) ListenAndServe() {
 
 func (c *Client) Close() error {
 	if c.conn != nil {
-		return c.conn.Close()
+		message := websocket.FormatCloseMessage(websocket.CloseMessage, "")
+		if err := c.conn.WriteControl(websocket.CloseMessage, message, time.Now().Add(10*time.Second)); err != nil {
+			return err
+		}
 	}
 	return nil
 }

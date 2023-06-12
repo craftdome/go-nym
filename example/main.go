@@ -9,23 +9,29 @@ import (
 	"os/signal"
 )
 
+var (
+	done = make(chan struct{}, 1)
+)
+
 func main() {
 	// Kill signals processing
 	interrupt := make(chan os.Signal)
 	signal.Notify(interrupt, os.Interrupt, os.Kill)
 
 	// Init the client via server credentials
-	client := nym.NewClient("ws://127.0.0.1:1977")
+	client := nym.NewClient("ws://192.168.88.3:1977")
 
 	// Dial a connection to the server
 	if err := client.Dial(); err != nil {
 		panic(err)
 	}
-	// Closing the client upon completion of main()
-	defer client.Close()
 
 	// Start reading WS messages
-	go client.ListenAndServe()
+	go func() {
+		if err := client.ListenAndServe(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+	}()
 
 	go func() {
 		// Incoming Message Channel
@@ -42,6 +48,9 @@ func main() {
 				fmt.Printf("Received: %s, SenderTag: %s\n", msg.Message, msg.SenderTag)
 			}
 		}
+
+		fmt.Println("Closed")
+		done <- struct{}{}
 	}()
 
 	// Request your own address
@@ -50,14 +59,14 @@ func main() {
 	}
 
 	// Send a message
-	addr := "9wxVvU4mbk4ZpWLiKEM45Bw3ednUVsfTyooTU3jr6iDR.HcJdxJrPDqWfw6TiauLZEC3mKjFByzFGEtFvDPe2pKW3@Emswx6KXyjRfq1c2k4d4uD2e6nBSbH1biorCZUei8UNS"
+	addr := "24b55Qzwct8PfVENpvtfugbds2EUjMVfE4MGb2TuHfsk.8PbP7rCGU7VZHofGHFiHMWzshYGgZjjsVGJhzMmrZnWt@EBT8jTD8o4tKng2NXrrcrzVhJiBnKpT1bJy5CMeArt2w"
 	r := nym.NewSend("Mix it up!", addr)
 	if err := client.SendRequestAsText(r); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
 
 	// Send an anonymous message
-	addr = "9wxVvU4mbk4ZpWLiKEM45Bw3ednUVsfTyooTU3jr6iDR.HcJdxJrPDqWfw6TiauLZEC3mKjFByzFGEtFvDPe2pKW3@Emswx6KXyjRfq1c2k4d4uD2e6nBSbH1biorCZUei8UNS"
+	addr = "24b55Qzwct8PfVENpvtfugbds2EUjMVfE4MGb2TuHfsk.8PbP7rCGU7VZHofGHFiHMWzshYGgZjjsVGJhzMmrZnWt@EBT8jTD8o4tKng2NXrrcrzVhJiBnKpT1bJy5CMeArt2w"
 	replySurbs := 1
 	r = nym.NewSendAnonymous("Enjoy your anonymous!", addr, replySurbs)
 	if err := client.SendRequestAsText(r); err != nil {
@@ -65,7 +74,7 @@ func main() {
 	}
 
 	// Reply to an anonymous message
-	senderTag := "HJNPCE41NncWGnNSC5w6Cq"
+	senderTag := "Frwzy6mWLSkqrdQwFLhJdL"
 	r = nym.NewReply("Pong.", senderTag)
 	if err := client.SendRequestAsText(r); err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -73,5 +82,11 @@ func main() {
 
 	// Waiting for the kill or interrupt signal
 	<-interrupt
+	// Closing the client
+	if err := client.Close(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
+	// Waiting for the done signal
+	<-done
 	fmt.Println("Done.")
 }
