@@ -25,7 +25,7 @@ import "github.com/Tyz3/go-nym"
 
 1. Для начала необходимо инициализировать клиент подключения с указанием адреса websocket-подключения.
 ```go
-// Init the client via server credentials
+// Init the client via server's credentials
 client := nym.NewClient("ws://127.0.0.1:1977")
 ```
 
