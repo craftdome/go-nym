@@ -1,4 +1,4 @@
-module github.com/Tyz3/go-nym
+module github.com/craftdome/go-nym
 
 go 1.20
 
