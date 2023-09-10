@@ -2,7 +2,7 @@ package request
 
 import (
 	"encoding/json"
-	"github.com/Tyz3/go-nym/tags"
+	"github.com/craftdome/go-nym/tags"
 )
 
 type GetSelfAddress struct {

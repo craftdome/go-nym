@@ -1,9 +1,9 @@
 package nym
 
 import (
-	"github.com/Tyz3/go-nym/request"
-	"github.com/Tyz3/go-nym/response"
-	"github.com/Tyz3/go-nym/tags"
+	"github.com/craftdome/go-nym/request"
+	"github.com/craftdome/go-nym/response"
+	"github.com/craftdome/go-nym/tags"
 	"github.com/pkg/errors"
 	"io"
 )

@@ -2,7 +2,7 @@ package response
 
 import (
 	"encoding/json"
-	"github.com/Tyz3/go-nym/tags"
+	"github.com/craftdome/go-nym/tags"
 	"io"
 )
 
