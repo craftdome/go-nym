@@ -13,12 +13,12 @@
 
 Используйте стандартные инструменты Go для установки зависисмости:
 ```
-go get github.com/Tyz3/go-nym
+go get github.com/craftdome/go-nym
 ```
 
 Импорт базового пакета:
 ```go
-import "github.com/Tyz3/go-nym"
+import "github.com/craftdome/go-nym"
 ```
 
 # Чтение сообщений
