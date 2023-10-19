@@ -5,9 +5,9 @@
 
 ## Миксноды разработчика
 
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=mix_node.identity_key&style=plastic&logo=numpy&logoColor=white&label=Advanced%20Engineering%201&color=%23136401&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895) 
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=stake_saturation&style=plastic&logo=myspace&logoColor=white&label=Stake&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895)
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=mix_node.version&style=plastic&logo=git&logoColor=white&label=Version&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895)
+[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=mix_node.identity_key&style=plastic&logo=numpy&logoColor=white&label=Advanced%20Engineering%201&color=%23136401&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895) ](https://explorer.nymtech.net/network-components/mixnode/895)
+[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=stake_saturation&style=plastic&logo=myspace&logoColor=white&label=Stake&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895)](https://explorer.nymtech.net/network-components/mixnode/895)
+[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=mix_node.version&style=plastic&logo=git&logoColor=white&label=Version&cacheSeconds=60&link=https%3A%2F%2Fexplorer.nymtech.net%2Fnetwork-components%2Fmixnode%2F895)](https://explorer.nymtech.net/network-components/mixnode/895)
 
 # Особенности
 
