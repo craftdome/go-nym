@@ -19,7 +19,7 @@ func main() {
 	signal.Notify(interrupt, os.Interrupt, os.Kill)
 
 	// Init the client via server credentials
-	client := nym.NewClient("ws://192.168.88.3:1977")
+	client := nym.NewClient("ws://192.168.88.4:1977")
 
 	// Dial a connection to the server
 	if err := client.Dial(); err != nil {
@@ -59,14 +59,14 @@ func main() {
 	}
 
 	// Send a message
-	addr := "24b55Qzwct8PfVENpvtfugbds2EUjMVfE4MGb2TuHfsk.8PbP7rCGU7VZHofGHFiHMWzshYGgZjjsVGJhzMmrZnWt@EBT8jTD8o4tKng2NXrrcrzVhJiBnKpT1bJy5CMeArt2w"
+	addr := "2w2mvQzGHuzXdz1pQSvTWXiqZe26Z2BKNkFTQ5g7MuLi.DfkhfLipgtuRLAWWHx74iGkJWCpM6U5RFwaJ3FUaMicu@HWdr8jgcr32cVGbjisjmwnVF4xrUBRGvbw86F9e3rFzS"
 	r := nym.NewSend("Mix it up!", addr)
 	if err := client.SendRequestAsText(r); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
 
 	// Send an anonymous message
-	addr = "24b55Qzwct8PfVENpvtfugbds2EUjMVfE4MGb2TuHfsk.8PbP7rCGU7VZHofGHFiHMWzshYGgZjjsVGJhzMmrZnWt@EBT8jTD8o4tKng2NXrrcrzVhJiBnKpT1bJy5CMeArt2w"
+	addr = "2w2mvQzGHuzXdz1pQSvTWXiqZe26Z2BKNkFTQ5g7MuLi.DfkhfLipgtuRLAWWHx74iGkJWCpM6U5RFwaJ3FUaMicu@HWdr8jgcr32cVGbjisjmwnVF4xrUBRGvbw86F9e3rFzS"
 	replySurbs := 1
 	r = nym.NewSendAnonymous("Enjoy your anonymous!", addr, replySurbs)
 	if err := client.SendRequestAsText(r); err != nil {
@@ -74,7 +74,7 @@ func main() {
 	}
 
 	// Reply to an anonymous message
-	senderTag := "Frwzy6mWLSkqrdQwFLhJdL"
+	senderTag := "7vv2LmF9M6EwQRrmCiCJhr"
 	r = nym.NewReply("Pong.", senderTag)
 	if err := client.SendRequestAsText(r); err != nil {
 		fmt.Fprintln(os.Stderr, err)
