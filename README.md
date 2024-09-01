@@ -79,7 +79,7 @@ https://github.com/craftdome/go-nym/blob/17a1c03713c834ca65295c0c5818b0d1dba364e
 
 # Support the developer (Mixnodes)
 
-Below is a list of the developer's mixnodes. If you are looking for a node for delegating tokens, you can take a closer look at my options. The node owner's commission is only 4%, which is a low indicator among other nodes, where the commission can reach up to 20%, or even higher, if you add the node operating cost (sometimes there are 4000 tokens - this is about 28% of the maximum profitability of the node).
+Below is a list of the developer's mixnodes. If you are looking for a node for delegating tokens, you can take a closer look at my options.
 
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=mix_node.identity_key&style=flat-square&logo=numpy&logoColor=white&label=Advanced%20Engineering%201&color=%23136401&cacheSeconds=60)](https://explorer.nymtech.net/network-components/mixnode/895)
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fexplorer.nymtech.net%2Fapi%2Fv1%2Fmix-node%2F895&query=stake_saturation&style=flat-square&logo=myspace&logoColor=white&label=Stake&cacheSeconds=60)](https://explorer.nymtech.net/network-components/mixnode/895)
