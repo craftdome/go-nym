@@ -1,7 +1,7 @@
 package delegations
 
 import (
-	"contracts/mixnet/shared"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared"
 )
 
 type Client struct {

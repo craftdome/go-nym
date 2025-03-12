@@ -1,7 +1,7 @@
 package nodes
 
 import (
-	"contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 )
 
 type GetAllBondedParams struct {

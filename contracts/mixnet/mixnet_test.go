@@ -1,12 +1,12 @@
 package mixnet_test
 
 import (
-	"contracts/mixnet"
-	"contracts/mixnet/query/delegations"
-	"contracts/mixnet/query/intervals"
-	"contracts/mixnet/query/nodes"
-	"contracts/mixnet/query/rewards"
-	"contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"testing"

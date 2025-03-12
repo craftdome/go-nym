@@ -1,1 +1,1 @@
-module client
+module wsc

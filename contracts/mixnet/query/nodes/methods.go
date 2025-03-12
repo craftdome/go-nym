@@ -2,7 +2,7 @@ package nodes
 
 import (
 	"context"
-	"contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 )
 
 func (c *Client) GetAllBonded(ctx context.Context, params GetAllBondedParams) (*models.PagedBondedNodes, error) {
