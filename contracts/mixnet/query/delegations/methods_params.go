@@ -1,7 +1,7 @@
 package delegations
 
 import (
-	"contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/shared/models"
 )
 
 type GetNodeDelegationsParams struct {

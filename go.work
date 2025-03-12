@@ -3,7 +3,7 @@ go 1.24
 use (
 	./libs/uint128
 	./contracts
-	./clients/wsc
+	./clients
 	./examples/contracts/mixnet
 	./examples/clients/wsc
 )

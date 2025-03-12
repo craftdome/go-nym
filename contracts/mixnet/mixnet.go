@@ -2,13 +2,13 @@ package mixnet
 
 import (
 	"context"
-	"contracts/mixnet/query/contract"
-	"contracts/mixnet/query/delegations"
-	"contracts/mixnet/query/intervals"
-	"contracts/mixnet/query/nodes"
-	"contracts/mixnet/query/rewards"
-	"contracts/mixnet/shared/models"
 	"github.com/CosmWasm/wasmd/x/wasm/types"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/query/contract"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/query/delegations"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/query/intervals"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/query/nodes"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/query/rewards"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/shared/models"
 	"google.golang.org/grpc"
 )
 

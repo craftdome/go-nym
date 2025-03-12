@@ -1,4 +1,4 @@
-module contracts
+module github.com/craftdome/go-nym/contracts/v1
 
 go 1.24
 

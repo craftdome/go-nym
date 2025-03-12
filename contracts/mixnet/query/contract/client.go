@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"contracts/mixnet/shared"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet/shared"
 )
 
 type Client struct {

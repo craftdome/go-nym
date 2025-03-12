@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"contracts/mixnet"
+	"github.com/craftdome/go-nym/contracts/v1/mixnet"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -21,6 +21,13 @@ func main() {
 	client := mixnet.NewQueryClient(conn, contract)
 
 	ctx := context.Background()
+
+	contractVersion, err := client.Contract.GetVersion(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("Contract Version: %s", contractVersion.BuildVersion)
 
 	stateParams, err := client.Contract.GetStateParams(ctx)
 	if err != nil {

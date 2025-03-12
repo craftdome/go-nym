@@ -2,7 +2,7 @@ package request
 
 import (
 	"encoding/json"
-	"github.com/craftdome/go-nym/wsc/tags"
+	"github.com/craftdome/go-nym/v1/wsc/tags"
 )
 
 type GetLaneQueueLength struct {

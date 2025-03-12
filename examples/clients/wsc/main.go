@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	wsc "github.com/craftdome/go-nym"
-	"github.com/craftdome/go-nym/response"
-	"github.com/craftdome/go-nym/tags"
+	"github.com/craftdome/go-nym/v1/wsc"
+	"github.com/craftdome/go-nym/v1/wsc/response"
+	"github.com/craftdome/go-nym/v1/wsc/tags"
 	"os"
 	"os/signal"
 )
