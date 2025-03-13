@@ -2,7 +2,7 @@ package request
 
 import (
 	"encoding/json"
-	"github.com/craftdome/go-nym/v1/wsc/tags"
+	"github.com/craftdome/go-nym/clients/wsc/tags"
 )
 
 type Reply struct {

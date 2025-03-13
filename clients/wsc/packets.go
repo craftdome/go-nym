@@ -1,9 +1,9 @@
 package wsc
 
 import (
-	request2 "github.com/craftdome/go-nym/v1/wsc/request"
-	response2 "github.com/craftdome/go-nym/v1/wsc/response"
-	"github.com/craftdome/go-nym/v1/wsc/tags"
+	request2 "github.com/craftdome/go-nym/clients/wsc/request"
+	response2 "github.com/craftdome/go-nym/clients/wsc/response"
+	"github.com/craftdome/go-nym/clients/wsc/tags"
 	"github.com/pkg/errors"
 	"io"
 )

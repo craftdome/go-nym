@@ -2,7 +2,7 @@ package delegations
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/v1/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 )
 
 func (c *Client) GetByNode(ctx context.Context, params GetNodeDelegationsParams) (*models.PagedNodeDelegations, error) {

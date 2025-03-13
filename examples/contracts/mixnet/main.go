@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/v1/mixnet"
+	"github.com/craftdome/go-nym/contracts/mixnet"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"

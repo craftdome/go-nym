@@ -1,6 +1,6 @@
 package mixnet
 
-import "github.com/craftdome/go-nym/contracts/v1/mixnet/shared/models"
+import "github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 
 type ContractAdmin = models.ContractAdmin
 type ContractVersion = models.ContractVersion

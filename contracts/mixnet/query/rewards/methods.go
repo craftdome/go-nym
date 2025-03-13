@@ -2,7 +2,7 @@ package rewards
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/v1/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 )
 
 func (c *Client) GetPendingByOwner(ctx context.Context, params GetPendingByOwnerParams) (*models.PendingReward, error) {
