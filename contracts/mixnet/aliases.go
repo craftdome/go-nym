@@ -1,6 +1,12 @@
 package mixnet
 
-import "github.com/craftdome/go-nym/contracts/mixnet/shared/models"
+import (
+	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
+	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
+	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
+)
 
 type ContractAdmin = models.ContractAdmin
 type ContractVersion = models.ContractVersion
@@ -35,3 +41,32 @@ type PendingEpochEvents = models.PendingEpochEvents
 type PendingEpochEvent = models.PendingEpochEvent
 type PendingIntervalEvents = models.PendingIntervalEvents
 type PendingIntervalEvent = models.PendingIntervalEvent
+
+type GetAllBondedParams = nodes.GetAllBondedParams
+type GetAllUnbondedParams = nodes.GetAllUnbondedParams
+type GetUnbondedParams = nodes.GetUnbondedParams
+type GetUnbondedByOwnerParams = nodes.GetUnbondedByOwnerParams
+type GetUnbondedByIdentityKeyParams = nodes.GetUnbondedByIdentityKeyParams
+type GetAllDetailedParams = nodes.GetAllDetailedParams
+type GetDetailedParams = nodes.GetDetailedParams
+type GetDetailedByOwnerParams = nodes.GetDetailedByOwnerParams
+type GetDetailedByIdentityKeyParams = nodes.GetDetailedByIdentityKeyParams
+type GetRewardingDetailsParams = nodes.GetRewardingDetailsParams
+type GetStakeSaturationParams = nodes.GetStakeSaturationParams
+type GetEpochAssignmentByRoleParams = nodes.GetEpochAssignmentByRoleParams
+
+type GetDelegationsParams = delegations.GetDelegationsParams
+type GetNodeDelegationsParams = delegations.GetNodeDelegationsParams
+type GetDelegatorDelegationsParams = delegations.GetDelegatorDelegationsParams
+type GetNodeDelegationParams = delegations.GetNodeDelegationParams
+
+type GetPendingByOwnerParams = rewards.GetPendingByOwnerParams
+type GetPendingByNodeParams = rewards.GetPendingByNodeParams
+type GetPendingByNodeAndDelegatorParams = rewards.GetPendingByNodeAndDelegatorParams
+type EstimateOperatorRewardParams = rewards.EstimateOperatorRewardParams
+type EstimateDelegatorRewardParams = rewards.EstimateDelegatorRewardParams
+
+type GetPendingEpochEventsParams = intervals.GetPendingEpochEventsParams
+type GetPendingEpochEventParams = intervals.GetPendingEpochEventParams
+type GetPendingIntervalEventsParams = intervals.GetPendingIntervalEventsParams
+type GetPendingIntervalEventParams = intervals.GetPendingIntervalEventParams

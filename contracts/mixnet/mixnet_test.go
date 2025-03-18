@@ -2,10 +2,6 @@ package mixnet_test
 
 import (
 	"github.com/craftdome/go-nym/contracts/mixnet"
-	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
-	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
-	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
-	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
 	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -170,7 +166,7 @@ func TestQueryClient_Contract_GetNodeVersionHistory(t *testing.T) {
 
 }
 
-func TestClient_Contract_GetParams(t *testing.T) {
+func TestQueryClient_Contract_GetParams(t *testing.T) {
 	resp, err := query.Contract.GetRewardingParams(t.Context())
 	if err != nil {
 		t.Fatal(err)
@@ -182,7 +178,7 @@ func TestClient_Contract_GetParams(t *testing.T) {
 	}
 }
 
-func TestClient_Contract_GetEpochStatus(t *testing.T) {
+func TestQueryClient_Contract_GetEpochStatus(t *testing.T) {
 	resp, err := query.Contract.GetEpochStatus(t.Context())
 	if err != nil {
 		t.Fatal(err)
@@ -198,7 +194,7 @@ func TestClient_Contract_GetEpochStatus(t *testing.T) {
 	}
 }
 
-func TestClient_Contract_GetIntervalStatus(t *testing.T) {
+func TestQueryClient_Contract_GetIntervalStatus(t *testing.T) {
 	resp, err := query.Contract.GetIntervalStatus(t.Context())
 	if err != nil {
 		t.Fatal(err)
@@ -226,8 +222,8 @@ func TestClient_Contract_GetIntervalStatus(t *testing.T) {
 	}
 }
 
-func TestClient_Nodes_GetAllBonded(t *testing.T) {
-	params := nodes.GetAllBondedParams{}
+func TestQueryClient_Nodes_GetAllBonded(t *testing.T) {
+	params := mixnet.GetAllBondedParams{}
 
 	t.Run("Valid", func(t *testing.T) {
 		got, err := query.Nodes.GetAllBonded(t.Context(), params)
@@ -253,8 +249,8 @@ func TestClient_Nodes_GetAllBonded(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetAllDetailed(t *testing.T) {
-	params := nodes.GetAllDetailedParams{
+func TestQueryClient_Nodes_GetAllDetailed(t *testing.T) {
+	params := mixnet.GetAllDetailedParams{
 		StartAfter: 0,
 		Limit:      10,
 	}
@@ -286,8 +282,8 @@ func TestClient_Nodes_GetAllDetailed(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetUnbonded(t *testing.T) {
-	params := nodes.GetUnbondedParams{
+func TestQueryClient_Nodes_GetUnbonded(t *testing.T) {
+	params := mixnet.GetUnbondedParams{
 		NodeID: 119,
 	}
 
@@ -304,8 +300,8 @@ func TestClient_Nodes_GetUnbonded(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetAllUnbonded(t *testing.T) {
-	params := nodes.GetAllUnbondedParams{
+func TestQueryClient_Nodes_GetAllUnbonded(t *testing.T) {
+	params := mixnet.GetAllUnbondedParams{
 		Limit: 10,
 	}
 
@@ -333,8 +329,8 @@ func TestClient_Nodes_GetAllUnbonded(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetUnbondedByOperator(t *testing.T) {
-	params := nodes.GetUnbondedByOwnerParams{
+func TestQueryClient_Nodes_GetUnbondedByOperator(t *testing.T) {
+	params := mixnet.GetUnbondedByOwnerParams{
 		Owner: "n1vs7aplr9n208artds98j2h7mdpyhlrq4kj6k67",
 	}
 
@@ -362,8 +358,8 @@ func TestClient_Nodes_GetUnbondedByOperator(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetUnbondedByIdentityKey(t *testing.T) {
-	params := nodes.GetUnbondedByIdentityKeyParams{
+func TestQueryClient_Nodes_GetUnbondedByIdentityKey(t *testing.T) {
+	params := mixnet.GetUnbondedByIdentityKeyParams{
 		IdentityKey: "5qVwSJZSArAJibfGaS4G3oV7hidemit3WJFg62YMB2s6",
 		StartAfter:  0,
 		Limit:       10,
@@ -390,8 +386,8 @@ func TestClient_Nodes_GetUnbondedByIdentityKey(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetDetailedByOwner(t *testing.T) {
-	params := nodes.GetDetailedByOwnerParams{
+func TestQueryClient_Nodes_GetDetailedByOwner(t *testing.T) {
+	params := mixnet.GetDetailedByOwnerParams{
 		Owner: "n1xwme0cstucs4ddycz7yvmwdnawv0zz5dam9596",
 	}
 
@@ -408,8 +404,8 @@ func TestClient_Nodes_GetDetailedByOwner(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetDetailed(t *testing.T) {
-	params := nodes.GetDetailedParams{
+func TestQueryClient_Nodes_GetDetailed(t *testing.T) {
+	params := mixnet.GetDetailedParams{
 		NodeID: 895,
 	}
 
@@ -426,8 +422,8 @@ func TestClient_Nodes_GetDetailed(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetDetailedByIdentityKey(t *testing.T) {
-	params := nodes.GetDetailedByIdentityKeyParams{
+func TestQueryClient_Nodes_GetDetailedByIdentityKey(t *testing.T) {
+	params := mixnet.GetDetailedByIdentityKeyParams{
 		IdentityKey: "J3Wfpxca9mwnbipScWTkKCrbNnZ9J5M4YmjKCFTnXwWN",
 	}
 
@@ -444,8 +440,8 @@ func TestClient_Nodes_GetDetailedByIdentityKey(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetRewardingDetails(t *testing.T) {
-	params := nodes.GetRewardingDetailsParams{
+func TestQueryClient_Nodes_GetRewardingDetails(t *testing.T) {
+	params := mixnet.GetRewardingDetailsParams{
 		NodeID: 895,
 	}
 
@@ -462,8 +458,8 @@ func TestClient_Nodes_GetRewardingDetails(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetStakeSaturation(t *testing.T) {
-	params := nodes.GetStakeSaturationParams{
+func TestQueryClient_Nodes_GetStakeSaturation(t *testing.T) {
+	params := mixnet.GetStakeSaturationParams{
 		NodeID: 895,
 	}
 
@@ -480,9 +476,9 @@ func TestClient_Nodes_GetStakeSaturation(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
+func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	t.Run("Valid Layer1", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: models.Layer1,
 		}
 
@@ -502,7 +498,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 
 	t.Run("Not valid", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: "l22",
 		}
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -513,7 +509,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 
 	t.Run("Valid Layer2", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: models.Layer2,
 		}
 
@@ -533,7 +529,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 
 	t.Run("Valid Layer3", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: models.Layer3,
 		}
 
@@ -553,7 +549,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 
 	t.Run("Valid EntryGateway", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: models.EntryGateway,
 		}
 
@@ -573,7 +569,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 
 	t.Run("Valid ExitGateway", func(t *testing.T) {
-		params := nodes.GetEpochAssignmentByRoleParams{
+		params := mixnet.GetEpochAssignmentByRoleParams{
 			Role: models.ExitGateway,
 		}
 
@@ -593,7 +589,7 @@ func TestClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	})
 }
 
-func TestClient_Nodes_GetEpochAssignmentMetadata(t *testing.T) {
+func TestQueryClient_Nodes_GetEpochAssignmentMetadata(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
 		got, err := query.Nodes.GetEpochAssignmentMetadata(t.Context())
 		if err != nil {
@@ -631,8 +627,8 @@ func TestClient_Nodes_GetEpochAssignmentMetadata(t *testing.T) {
 	})
 }
 
-func TestClient_Delegations_GetAll(t *testing.T) {
-	params := delegations.GetDelegationsParams{
+func TestQueryClient_Delegations_GetAll(t *testing.T) {
+	params := mixnet.GetDelegationsParams{
 		//StartAfter: models.StorageKey{V1: 1, V2: "n18ds90dz0ezjy9a059k8zamrj7q2u98c9yq9th4"},
 		Limit: 1,
 	}
@@ -704,8 +700,8 @@ func TestClient_Delegations_GetAll(t *testing.T) {
 	})
 }
 
-func TestClient_Delegations_GetByNode(t *testing.T) {
-	params := delegations.GetNodeDelegationsParams{
+func TestQueryClient_Delegations_GetByNode(t *testing.T) {
+	params := mixnet.GetNodeDelegationsParams{
 		NodeID: 895,
 		Limit:  10,
 	}
@@ -737,8 +733,8 @@ func TestClient_Delegations_GetByNode(t *testing.T) {
 	})
 }
 
-func TestClient_Delegations_GetByDelegator(t *testing.T) {
-	params := delegations.GetDelegatorDelegationsParams{
+func TestQueryClient_Delegations_GetByDelegator(t *testing.T) {
+	params := mixnet.GetDelegatorDelegationsParams{
 		Delegator: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw",
 		//StartAfter: models.StorageKey{V1: 21, V2: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw"},
 		Limit: 1,
@@ -816,8 +812,8 @@ func TestClient_Delegations_GetByDelegator(t *testing.T) {
 
 }
 
-func TestClient_Delegations_GetByNodeAndDelegator(t *testing.T) {
-	params := delegations.GetNodeDelegationParams{
+func TestQueryClient_Delegations_GetByNodeAndDelegator(t *testing.T) {
+	params := mixnet.GetNodeDelegationParams{
 		NodeID:    1227,
 		Delegator: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw",
 	}
@@ -849,9 +845,9 @@ func TestClient_Delegations_GetByNodeAndDelegator(t *testing.T) {
 	})
 }
 
-func TestClient_Rewards_GetPendingByOwner(t *testing.T) {
+func TestQueryClient_Rewards_GetPendingByOwner(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		params := rewards.GetPendingByOwnerParams{
+		params := mixnet.GetPendingByOwnerParams{
 			Owner: "n1xwme0cstucs4ddycz7yvmwdnawv0zz5dam9596",
 		}
 
@@ -867,9 +863,9 @@ func TestClient_Rewards_GetPendingByOwner(t *testing.T) {
 	})
 }
 
-func TestClient_Rewards_GetPendingByNode(t *testing.T) {
+func TestQueryClient_Rewards_GetPendingByNode(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		params := rewards.GetPendingByNodeParams{
+		params := mixnet.GetPendingByNodeParams{
 			NodeID: 895,
 		}
 
@@ -885,9 +881,9 @@ func TestClient_Rewards_GetPendingByNode(t *testing.T) {
 	})
 }
 
-func TestClient_Rewards_GetPendingByNodeAndDelegator(t *testing.T) {
+func TestQueryClient_Rewards_GetPendingByNodeAndDelegator(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		params := rewards.GetPendingByNodeAndDelegatorParams{
+		params := mixnet.GetPendingByNodeAndDelegatorParams{
 			Delegator: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw",
 			NodeID:    895,
 		}
@@ -904,9 +900,9 @@ func TestClient_Rewards_GetPendingByNodeAndDelegator(t *testing.T) {
 	})
 }
 
-func TestClient_Rewards_EstimateOperatorReward(t *testing.T) {
+func TestQueryClient_Rewards_EstimateOperatorReward(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		params := rewards.EstimateOperatorRewardParams{
+		params := mixnet.EstimateOperatorRewardParams{
 			NodeID:               895,
 			EstimatedPerformance: 0.99,
 			EstimatedWork:        0.98,
@@ -920,9 +916,9 @@ func TestClient_Rewards_EstimateOperatorReward(t *testing.T) {
 	})
 }
 
-func TestClient_Rewards_EstimateDelegatorReward(t *testing.T) {
+func TestQueryClient_Rewards_EstimateDelegatorReward(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		params := rewards.EstimateDelegatorRewardParams{
+		params := mixnet.EstimateDelegatorRewardParams{
 			Delegator:            "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw",
 			NodeID:               895,
 			EstimatedPerformance: 0.99,
@@ -937,8 +933,8 @@ func TestClient_Rewards_EstimateDelegatorReward(t *testing.T) {
 	})
 }
 
-func TestClient_Intervals_GetPendingEpochEvents(t *testing.T) {
-	params := intervals.GetPendingEpochEventsParams{
+func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
+	params := mixnet.GetPendingEpochEventsParams{
 		Limit: 2,
 	}
 
@@ -1043,8 +1039,8 @@ func TestClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 	})
 }
 
-func TestClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
-	params := intervals.GetPendingIntervalEventsParams{
+func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
+	params := mixnet.GetPendingIntervalEventsParams{
 		Limit: 2,
 	}
 
@@ -1154,9 +1150,9 @@ func TestClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 
 }
 
-func TestClient_Intervals_GetPendingEpochEvent(t *testing.T) {
+func TestQueryClient_Intervals_GetPendingEpochEvent(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		events, err := query.Intervals.GetPendingEpochEvents(t.Context(), intervals.GetPendingEpochEventsParams{Limit: 1})
+		events, err := query.Intervals.GetPendingEpochEvents(t.Context(), mixnet.GetPendingEpochEventsParams{Limit: 1})
 		if err != nil {
 			t.Fatalf("GetPendingEpochEvents() error = %v", err)
 		}
@@ -1165,7 +1161,7 @@ func TestClient_Intervals_GetPendingEpochEvent(t *testing.T) {
 			return
 		}
 
-		params := intervals.GetPendingEpochEventParams{
+		params := mixnet.GetPendingEpochEventParams{
 			EventID: events.Events[0].ID,
 		}
 
@@ -1185,9 +1181,9 @@ func TestClient_Intervals_GetPendingEpochEvent(t *testing.T) {
 	})
 }
 
-func TestClient_Intervals_GetPendingIntervalEvent(t *testing.T) {
+func TestQueryClient_Intervals_GetPendingIntervalEvent(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
-		events, err := query.Intervals.GetPendingIntervalEvents(t.Context(), intervals.GetPendingIntervalEventsParams{Limit: 1})
+		events, err := query.Intervals.GetPendingIntervalEvents(t.Context(), mixnet.GetPendingIntervalEventsParams{Limit: 1})
 		if err != nil {
 			t.Fatalf("GetPendingIntervalEvents() error = %v", err)
 		}
@@ -1196,7 +1192,7 @@ func TestClient_Intervals_GetPendingIntervalEvent(t *testing.T) {
 			return
 		}
 
-		params := intervals.GetPendingIntervalEventParams{
+		params := mixnet.GetPendingIntervalEventParams{
 			EventID: events.Events[0].ID,
 		}
 
@@ -1216,7 +1212,7 @@ func TestClient_Intervals_GetPendingIntervalEvent(t *testing.T) {
 	})
 }
 
-func TestClient_Intervals_GetNumberOfPendingEvents(t *testing.T) {
+func TestQueryClient_Intervals_GetNumberOfPendingEvents(t *testing.T) {
 	t.Run("Valid", func(t *testing.T) {
 		got, err := query.Intervals.GetNumberOfPendingEvents(t.Context())
 		if err != nil {
