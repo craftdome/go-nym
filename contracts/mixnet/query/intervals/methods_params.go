@@ -1,7 +1,7 @@
 package intervals
 
 import (
-	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/models"
 )
 
 type GetPendingEpochEventsParams struct {

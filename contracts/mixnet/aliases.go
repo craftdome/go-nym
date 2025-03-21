@@ -1,12 +1,14 @@
 package mixnet
 
 import (
+	"github.com/craftdome/go-nym/contracts/mixnet/models"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
-	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 )
+
+// contract-related
 
 type ContractAdmin = models.ContractAdmin
 type ContractVersion = models.ContractVersion
@@ -19,6 +21,8 @@ type RewardingParams = models.RewardingParams
 type EpochStatus = models.EpochStatus
 type IntervalStatus = models.IntervalStatus
 
+// nodes-related
+
 type PagedBondedNodes = models.PagedBondedNodes
 type PagedUnbondedNodes = models.PagedUnbondedNodes
 type UnbondedNode = models.UnbondedNode
@@ -28,19 +32,6 @@ type NodeRewardingDetails = models.NodeRewardingDetails
 type NodeStakeSaturation = models.NodeStakeSaturation
 type EpochAssignment = models.EpochAssignment
 type EpochAssignmentMetadata = models.EpochAssignmentMetadata
-
-type PagedAllDelegations = models.PagedAllDelegations
-type PagedNodeDelegations = models.PagedNodeDelegations
-type PagedDelegatorDelegations = models.PagedDelegatorDelegations
-type DelegatorNodeDelegation = models.DelegatorNodeDelegation
-
-type PendingReward = models.PendingReward
-type EstimatedCurrentEpochReward = models.EstimatedCurrentEpochReward
-
-type PendingEpochEvents = models.PendingEpochEvents
-type PendingEpochEvent = models.PendingEpochEvent
-type PendingIntervalEvents = models.PendingIntervalEvents
-type PendingIntervalEvent = models.PendingIntervalEvent
 
 type GetAllBondedParams = nodes.GetAllBondedParams
 type GetAllUnbondedParams = nodes.GetAllUnbondedParams
@@ -55,16 +46,35 @@ type GetRewardingDetailsParams = nodes.GetRewardingDetailsParams
 type GetStakeSaturationParams = nodes.GetStakeSaturationParams
 type GetEpochAssignmentByRoleParams = nodes.GetEpochAssignmentByRoleParams
 
+// delegations-related
+
+type PagedAllDelegations = models.PagedAllDelegations
+type PagedNodeDelegations = models.PagedNodeDelegations
+type PagedDelegatorDelegations = models.PagedDelegatorDelegations
+type DelegatorNodeDelegation = models.DelegatorNodeDelegation
+
 type GetDelegationsParams = delegations.GetDelegationsParams
 type GetNodeDelegationsParams = delegations.GetNodeDelegationsParams
 type GetDelegatorDelegationsParams = delegations.GetDelegatorDelegationsParams
 type GetNodeDelegationParams = delegations.GetNodeDelegationParams
+
+// rewards-related
+
+type PendingReward = models.PendingReward
+type EstimatedCurrentEpochReward = models.EstimatedCurrentEpochReward
 
 type GetPendingByOwnerParams = rewards.GetPendingByOwnerParams
 type GetPendingByNodeParams = rewards.GetPendingByNodeParams
 type GetPendingByNodeAndDelegatorParams = rewards.GetPendingByNodeAndDelegatorParams
 type EstimateOperatorRewardParams = rewards.EstimateOperatorRewardParams
 type EstimateDelegatorRewardParams = rewards.EstimateDelegatorRewardParams
+
+// intervals-related
+
+type PendingEpochEvents = models.PendingEpochEvents
+type PendingEpochEvent = models.PendingEpochEvent
+type PendingIntervalEvents = models.PendingIntervalEvents
+type PendingIntervalEvent = models.PendingIntervalEvent
 
 type GetPendingEpochEventsParams = intervals.GetPendingEpochEventsParams
 type GetPendingEpochEventParams = intervals.GetPendingEpochEventParams

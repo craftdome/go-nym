@@ -2,7 +2,7 @@ package intervals
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/models"
 )
 
 func (c *Client) GetPendingEpochEvents(ctx context.Context, params GetPendingEpochEventsParams) (*models.PendingEpochEvents, error) {

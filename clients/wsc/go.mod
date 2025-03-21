@@ -1,4 +1,4 @@
-module github.com/craftdome/go-nym/clients
+module github.com/craftdome/go-nym/clients/wsc
 
 go 1.24
 
