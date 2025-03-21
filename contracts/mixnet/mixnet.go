@@ -3,12 +3,12 @@ package mixnet
 import (
 	"context"
 	"github.com/CosmWasm/wasmd/x/wasm/types"
+	"github.com/craftdome/go-nym/contracts/mixnet/models"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/contract"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
-	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
 	"google.golang.org/grpc"
 )
 
@@ -26,46 +26,46 @@ type Contract interface {
 }
 
 type Nodes interface {
-	GetAllBonded(context.Context, nodes.GetAllBondedParams) (*PagedBondedNodes, error)
+	GetAllBonded(context.Context, GetAllBondedParams) (*PagedBondedNodes, error)
 
-	GetAllUnbonded(context.Context, nodes.GetAllUnbondedParams) (*PagedUnbondedNodes, error)
-	GetUnbonded(context.Context, nodes.GetUnbondedParams) (*UnbondedNode, error)
-	GetUnbondedByOwner(context.Context, nodes.GetUnbondedByOwnerParams) (*PagedUnbondedNodes, error)
-	GetUnbondedByIdentityKey(context.Context, nodes.GetUnbondedByIdentityKeyParams) (*PagedUnbondedNodes, error)
+	GetAllUnbonded(context.Context, GetAllUnbondedParams) (*PagedUnbondedNodes, error)
+	GetUnbonded(context.Context, GetUnbondedParams) (*UnbondedNode, error)
+	GetUnbondedByOwner(context.Context, GetUnbondedByOwnerParams) (*PagedUnbondedNodes, error)
+	GetUnbondedByIdentityKey(context.Context, GetUnbondedByIdentityKeyParams) (*PagedUnbondedNodes, error)
 
-	GetAllDetailed(context.Context, nodes.GetAllDetailedParams) (*PagedDetailedNodes, error)
-	GetDetailed(context.Context, nodes.GetDetailedParams) (*DetailedNode, error)
-	GetDetailedByOwner(context.Context, nodes.GetDetailedByOwnerParams) (*DetailedNode, error)
-	GetDetailedByIdentityKey(context.Context, nodes.GetDetailedByIdentityKeyParams) (*DetailedNode, error)
+	GetAllDetailed(context.Context, GetAllDetailedParams) (*PagedDetailedNodes, error)
+	GetDetailed(context.Context, GetDetailedParams) (*DetailedNode, error)
+	GetDetailedByOwner(context.Context, GetDetailedByOwnerParams) (*DetailedNode, error)
+	GetDetailedByIdentityKey(context.Context, GetDetailedByIdentityKeyParams) (*DetailedNode, error)
 
-	GetRewardingDetails(context.Context, nodes.GetRewardingDetailsParams) (*NodeRewardingDetails, error)
-	GetStakeSaturation(context.Context, nodes.GetStakeSaturationParams) (*NodeStakeSaturation, error)
+	GetRewardingDetails(context.Context, GetRewardingDetailsParams) (*NodeRewardingDetails, error)
+	GetStakeSaturation(context.Context, GetStakeSaturationParams) (*NodeStakeSaturation, error)
 
-	GetEpochAssignmentByRole(context.Context, nodes.GetEpochAssignmentByRoleParams) (*EpochAssignment, error)
+	GetEpochAssignmentByRole(context.Context, GetEpochAssignmentByRoleParams) (*EpochAssignment, error)
 	GetEpochAssignmentMetadata(context.Context) (*EpochAssignmentMetadata, error)
 }
 
 type Delegations interface {
-	GetAll(context.Context, delegations.GetDelegationsParams) (*PagedAllDelegations, error)
-	GetByNode(context.Context, delegations.GetNodeDelegationsParams) (*PagedNodeDelegations, error)
-	GetByDelegator(context.Context, delegations.GetDelegatorDelegationsParams) (*PagedDelegatorDelegations, error)
-	GetByNodeAndDelegator(context.Context, delegations.GetNodeDelegationParams) (*DelegatorNodeDelegation, error)
+	GetAll(context.Context, GetDelegationsParams) (*PagedAllDelegations, error)
+	GetByNode(context.Context, GetNodeDelegationsParams) (*PagedNodeDelegations, error)
+	GetByDelegator(context.Context, GetDelegatorDelegationsParams) (*PagedDelegatorDelegations, error)
+	GetByNodeAndDelegator(context.Context, GetNodeDelegationParams) (*DelegatorNodeDelegation, error)
 }
 
 type Rewards interface {
-	GetPendingByOwner(context.Context, rewards.GetPendingByOwnerParams) (*PendingReward, error)
-	GetPendingByNode(context.Context, rewards.GetPendingByNodeParams) (*PendingReward, error)
-	GetPendingByNodeAndDelegator(context.Context, rewards.GetPendingByNodeAndDelegatorParams) (*PendingReward, error)
-	EstimateOperatorReward(context.Context, rewards.EstimateOperatorRewardParams) (*EstimatedCurrentEpochReward, error)
-	EstimateDelegatorReward(context.Context, rewards.EstimateDelegatorRewardParams) (*EstimatedCurrentEpochReward, error)
+	GetPendingByOwner(context.Context, GetPendingByOwnerParams) (*PendingReward, error)
+	GetPendingByNode(context.Context, GetPendingByNodeParams) (*PendingReward, error)
+	GetPendingByNodeAndDelegator(context.Context, GetPendingByNodeAndDelegatorParams) (*PendingReward, error)
+	EstimateOperatorReward(context.Context, EstimateOperatorRewardParams) (*EstimatedCurrentEpochReward, error)
+	EstimateDelegatorReward(context.Context, EstimateDelegatorRewardParams) (*EstimatedCurrentEpochReward, error)
 }
 
 type Intervals interface {
 	GetNumberOfPendingEvents(context.Context) (*models.NumberOfPendingEvents, error)
-	GetPendingEpochEvents(context.Context, intervals.GetPendingEpochEventsParams) (*PendingEpochEvents, error)
-	GetPendingEpochEvent(context.Context, intervals.GetPendingEpochEventParams) (*PendingEpochEvent, error)
-	GetPendingIntervalEvents(context.Context, intervals.GetPendingIntervalEventsParams) (*PendingIntervalEvents, error)
-	GetPendingIntervalEvent(context.Context, intervals.GetPendingIntervalEventParams) (*PendingIntervalEvent, error)
+	GetPendingEpochEvents(context.Context, GetPendingEpochEventsParams) (*PendingEpochEvents, error)
+	GetPendingEpochEvent(context.Context, GetPendingEpochEventParams) (*PendingEpochEvent, error)
+	GetPendingIntervalEvents(context.Context, GetPendingIntervalEventsParams) (*PendingIntervalEvents, error)
+	GetPendingIntervalEvent(context.Context, GetPendingIntervalEventParams) (*PendingIntervalEvent, error)
 }
 
 type QueryClient struct {

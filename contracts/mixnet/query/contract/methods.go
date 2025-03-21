@@ -2,7 +2,7 @@ package contract
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/mixnet/shared/models"
+	"github.com/craftdome/go-nym/contracts/mixnet/models"
 )
 
 func (c *Client) GetAdmin(ctx context.Context) (*models.ContractAdmin, error) {
