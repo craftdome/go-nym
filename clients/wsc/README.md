@@ -18,12 +18,12 @@ This library is designed to simplify interaction with the NYM protocol for [nym-
 
 Download:
 ```
-go get github.com/craftdome/go-nym
+go get github.com/craftdome/go-nym/clients/wsc@v1.0.2
 ```
 
 Import:
 ```go
-import "github.com/craftdome/go-nym/wsc"
+import "github.com/craftdome/go-nym/clients/wsc"
 ```
 
 # Using
@@ -34,45 +34,102 @@ import "github.com/craftdome/go-nym/wsc"
 - Only 1 connection is allowed at a time.
 - If you need an external connection, use a local networks ([10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12](https://en.wikipedia.org/wiki/Private_network)) instead of a global unicast one to increase security.
 
-### Initialization
+### Example
 
-1. First, you need to `init` the connection client with the nym-client address. We copy the connection `address:port` from the console after running the nym-client. By default it's `localhost:1977`, or in my case `192.168.88.4:1977`.
+```go
+package main
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L21-L22
+import (
+	"fmt"
+	"github.com/craftdome/go-nym/clients/wsc"
+	"github.com/craftdome/go-nym/clients/wsc/response"
+	"github.com/craftdome/go-nym/clients/wsc/tags"
+	"os"
+	"os/signal"
+)
 
-2. Connection establishing with the `nym-client`.
+var (
+	done = make(chan struct{}, 1)
+)
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L24-L27
+func main() {
+	// Kill signals processing
+	interrupt := make(chan os.Signal)
+	signal.Notify(interrupt, os.Interrupt, os.Kill)
 
-### Reading messages
+	// Init the client via server credentials
+	client := wsc.New("ws://192.168.88.4:1977")
 
-3. We turn on listening to incoming messages, which we then extract through the `Messages()` chan.
+	// Dial a connection to the server
+	if err := client.Dial(); err != nil {
+		panic(err)
+	}
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L29-L54
+	// Start reading WS messages
+	go func() {
+		if err := client.ListenAndServe(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+	}()
 
-### Sending messages
+	go func() {
+		// Incoming Message Channel
+		for message := range client.Messages() {
+			switch message.Type() {
+			case tags.Error:
+				msg := message.(*response.Error)
+				fmt.Printf("Error: %s\n", msg.Message)
+			case tags.SelfAddress:
+				msg := message.(*response.SelfAddress)
+				fmt.Printf("SelfAddress: %s\n", msg.Address)
+			case tags.Received:
+				msg := message.(*response.Received)
+				fmt.Printf("Received: %s, SenderTag: %s\n", msg.Message, msg.SenderTag)
+			}
+		}
 
-4. Getting your nym-client address (SelfAddress).
+		fmt.Println("Closed")
+		done <- struct{}{}
+	}()
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L56-L59
+	// Request your own address
+	if err := client.SendRequestAsText(wsc.NewGetSelfAddress()); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
 
-5. Sending a message (Send).
+	// Send a message
+	addr := "2w2mvQzGHuzXdz1pQSvTWXiqZe26Z2BKNkFTQ5g7MuLi.DfkhfLipgtuRLAWWHx74iGkJWCpM6U5RFwaJ3FUaMicu@HWdr8jgcr32cVGbjisjmwnVF4xrUBRGvbw86F9e3rFzS"
+	r := wsc.NewSend("Mix it up!", addr)
+	if err := client.SendRequestAsText(r); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L61-L66
+	// Send an anonymous message
+	addr = "2w2mvQzGHuzXdz1pQSvTWXiqZe26Z2BKNkFTQ5g7MuLi.DfkhfLipgtuRLAWWHx74iGkJWCpM6U5RFwaJ3FUaMicu@HWdr8jgcr32cVGbjisjmwnVF4xrUBRGvbw86F9e3rFzS"
+	replySurbs := 1
+	r = wsc.NewSendAnonymous("Enjoy your anonymous!", addr, replySurbs)
+	if err := client.SendRequestAsText(r); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
 
-6. Sending a SURB message to receive an anonymous response (SendAnonymous).
+	// Reply to an anonymous message
+	senderTag := "7vv2LmF9M6EwQRrmCiCJhr"
+	r = wsc.NewReply("Pong.", senderTag)
+	if err := client.SendRequestAsText(r); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
 
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L68-L74
-
-7. Sending a reply to the SendAnonymous message (Reply).
-
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L76-L81
-
-### Closing the connection correctly
-
-8. We close the connection with the `nym-client` after the interrupt (sigint/sigkill) and wait for the reading gorutine sent `done` signal.
-
-https://github.com/craftdome/go-nym/blob/7db430e3a036044c42c447c79d8fbeae7a068806/examples/clients/wsc/main.go#L83-L91
+	// Waiting for the kill or interrupt signal
+	<-interrupt
+	// Closing the client
+	if err := client.Close(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
+	// Waiting for the done signal
+	<-done
+	fmt.Println("Done.")
+}
+```
 
 # Support the developer (Nodes)
 
