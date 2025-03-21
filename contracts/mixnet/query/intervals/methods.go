@@ -2,10 +2,10 @@ package intervals
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/mixnet/models"
+	"github.com/craftdome/go-nym/pkg/contracts/mixnet/models"
 )
 
-func (c *Client) GetPendingEpochEvents(ctx context.Context, params GetPendingEpochEventsParams) (*models.PendingEpochEvents, error) {
+func (c *Client) GetPendingEpochEvents(ctx context.Context, params GetPendingEpochEventsParams) (models.PendingEpochEvents, error) {
 	type req struct {
 		MethodParams GetPendingEpochEventsParams `json:"get_pending_epoch_events"`
 	}
@@ -13,11 +13,10 @@ func (c *Client) GetPendingEpochEvents(ctx context.Context, params GetPendingEpo
 	r := req{MethodParams: params}
 	r.MethodParams.Limit = min(params.Limit, models.EpochEventsMaxRetrievalLimit)
 
-	var result models.PendingEpochEvents
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PendingEpochEvents](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetPendingIntervalEvents(ctx context.Context, params GetPendingIntervalEventsParams) (*models.PendingIntervalEvents, error) {
+func (c *Client) GetPendingIntervalEvents(ctx context.Context, params GetPendingIntervalEventsParams) (models.PendingIntervalEvents, error) {
 	type req struct {
 		MethodParams GetPendingIntervalEventsParams `json:"get_pending_interval_events"`
 	}
@@ -25,39 +24,35 @@ func (c *Client) GetPendingIntervalEvents(ctx context.Context, params GetPending
 	r := req{MethodParams: params}
 	r.MethodParams.Limit = min(params.Limit, models.IntervalEventsMaxRetrievalLimit)
 
-	var result models.PendingIntervalEvents
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PendingIntervalEvents](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetPendingEpochEvent(ctx context.Context, params GetPendingEpochEventParams) (*models.PendingEpochEvent, error) {
+func (c *Client) GetPendingEpochEvent(ctx context.Context, params GetPendingEpochEventParams) (models.PendingEpochEvent, error) {
 	type req struct {
 		MethodParams GetPendingEpochEventParams `json:"get_pending_epoch_event"`
 	}
 
 	r := req{MethodParams: params}
 
-	var result models.PendingEpochEvent
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PendingEpochEvent](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetPendingIntervalEvent(ctx context.Context, params GetPendingIntervalEventParams) (*models.PendingIntervalEvent, error) {
+func (c *Client) GetPendingIntervalEvent(ctx context.Context, params GetPendingIntervalEventParams) (models.PendingIntervalEvent, error) {
 	type req struct {
 		MethodParams GetPendingIntervalEventParams `json:"get_pending_interval_event"`
 	}
 
 	r := req{MethodParams: params}
 
-	var result models.PendingIntervalEvent
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PendingIntervalEvent](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetNumberOfPendingEvents(ctx context.Context) (*models.NumberOfPendingEvents, error) {
+func (c *Client) GetNumberOfPendingEvents(ctx context.Context) (models.NumberOfPendingEvents, error) {
 	type req struct {
 		MethodParams struct{} `json:"get_number_of_pending_events"`
 	}
 
 	r := req{}
 
-	var result models.NumberOfPendingEvents
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.NumberOfPendingEvents](ctx, c.client, c.contract, r)
 }

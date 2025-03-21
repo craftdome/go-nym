@@ -13,11 +13,14 @@ func main() {
 	client := &http.Client{}
 	limiter := rate.NewLimiter(rate.Inf, 0) // requests limiter
 
-	host := "nym-exit.hkg2.craftdome.app"
-	port := uint16(8080)
+	host := "nym-exit.hkg2.craftdome.app:8080"
 
 	// Node client
-	node, err := nymnode.New(ctx, client, limiter, host, port)
+	node, err := nymnode.New(
+		ctx, host,
+		nymnode.WithRateLimiter(limiter),
+		nymnode.WithCustomClient(client),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -2,20 +2,15 @@ package nymnode_test
 
 import (
 	"github.com/craftdome/go-nym/clients/nymnode"
-	"golang.org/x/time/rate"
-	"net/http"
 	"testing"
 )
 
 const (
-	host = "38.180.189.128" // "38.180.189.128", "2001:ac8:a:27:0:2:0:421"
-	port = uint16(8080)
+	host = "38.180.189.128:8080" // "38.180.189.128", "2001:ac8:a:27:0:2:0:421"
 )
 
-func setup(t *testing.T) nymnode.Client {
-	client := &http.Client{}
-	limiter := rate.NewLimiter(rate.Limit(4), 4)
-	c, err := nymnode.New(t.Context(), client, limiter, host, port)
+func setup(t *testing.T) *nymnode.Client {
+	c, err := nymnode.New(t.Context(), host)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,7 +18,7 @@ func setup(t *testing.T) nymnode.Client {
 	return c
 }
 
-func teardown(t *testing.T, c nymnode.Client) {}
+func teardown(t *testing.T, c *nymnode.Client) {}
 
 func TestClient(t *testing.T) {
 	c := setup(t)
@@ -130,7 +125,7 @@ func TestClient(t *testing.T) {
 
 	t.Run("Metrics GetPacketStatsMetrics", func(t *testing.T) {
 		t.Parallel()
-		info, err := c.GetIPR(t.Context())
+		info, err := c.GetPacketStatsMetrics(t.Context())
 		if err != nil {
 			t.Error(err)
 		}

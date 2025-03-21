@@ -1,4 +1,56 @@
-package models
+package nymnode
+
+type MixnetWebsockets struct {
+	WsPort  uint16 `json:"ws_port"`
+	WssPort uint16 `json:"wss_port,omitempty"`
+}
+
+type Wireguard struct {
+	Port      uint16 `json:"port"`
+	PublicKey string `json:"public_key"`
+}
+
+type ClientInterfaces struct {
+	MixnetWebsockets `json:"mixnet_websockets,omitempty"`
+	Wireguard        `json:"wireguard,omitempty"`
+}
+
+type Gateway struct {
+	ClientInterfaces `json:"client_interfaces,omitempty"`
+
+	EnforcesZKNyms bool `json:"enforces_zk_nyms"`
+}
+
+type Health struct {
+	Status string `json:"status"`
+
+	// Uptime in seconds
+	Uptime uint64 `json:"uptime"`
+}
+
+type IPPacketRouter struct {
+	EncodedIdentityKey string `json:"encoded_identity_key"`
+	EncodedX25519Key   string `json:"encoded_x25519_key"`
+	Address            string `json:"address"`
+}
+
+type PacketsStatsMetrics struct {
+	IngressMixing struct {
+		ForwardHopPacketsReceived uint64 `json:"forward_hop_packets_received"`
+		FinalHopPacketsReceived   uint64 `json:"final_hop_packets_received"`
+		MalformedPacketsReceived  uint64 `json:"malformed_packets_received"`
+		ExcessiveDelayPackets     uint64 `json:"excessive_delay_packets"`
+		ForwardHopPacketsDropped  uint64 `json:"forward_hop_packets_dropped"`
+		FinalHopPacketsDropped    uint64 `json:"final_hop_packets_dropped"`
+	} `json:"ingress_mixing"`
+	EgressMixing struct {
+		ForwardHopPacketsSent    uint64 `json:"forward_hop_packets_sent"`
+		ForwardHopPacketsDropped uint64 `json:"forward_hop_packets_dropped"`
+		AckPacketsSent           uint64 `json:"ack_packets_sent"`
+	} `json:"egress_mixing"`
+}
+
+type PrometheusMetrics string
 
 type AuxiliaryDetails struct {
 	Location      string `json:"location"`
@@ -70,4 +122,37 @@ type SystemInformation struct {
 		} `json:"crypto"`
 		TotalMemory uint64 `json:"total_memory"`
 	} `json:"hardware"`
+}
+
+type PolicyAction string
+
+const (
+	Accept  PolicyAction = "accept"
+	Reject  PolicyAction = "reject"
+	Accept6 PolicyAction = "accept6"
+	Reject6 PolicyAction = "reject6"
+)
+
+type NetworkRequester struct {
+	EncodedIdentityKey string `json:"encoded_identity_key"`
+	EncodedX25519Key   string `json:"encoded_x25519_key"`
+	Address            string `json:"address"`
+}
+
+type NetworkRequesterExitPolicy struct {
+	Enabled        bool   `json:"enabled"`
+	UpstreamSource string `json:"upstream_source"`
+	LastUpdated    uint64 `json:"last_updated"`
+	Policy         *struct {
+		Rules []struct {
+			Action  PolicyAction `json:"action"`
+			Pattern struct {
+				IpPattern string `json:"ip_pattern"`
+				Ports     struct {
+					Start uint16 `json:"start"`
+					End   uint16 `json:"end"`
+				} `json:"ports"`
+			} `json:"pattern"`
+		} `json:"rules"`
+	} `json:"policy"`
 }

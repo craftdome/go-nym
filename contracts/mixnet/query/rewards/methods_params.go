@@ -1,7 +1,7 @@
 package rewards
 
 import (
-	"github.com/craftdome/go-nym/contracts/mixnet/models"
+	"github.com/craftdome/go-nym/pkg/contracts/mixnet/models"
 )
 
 type GetPendingByOwnerParams struct {

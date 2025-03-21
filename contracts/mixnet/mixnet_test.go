@@ -2,7 +2,7 @@ package mixnet_test
 
 import (
 	"github.com/craftdome/go-nym/contracts/mixnet"
-	"github.com/craftdome/go-nym/contracts/mixnet/models"
+	"github.com/craftdome/go-nym/pkg/contracts/mixnet/models"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"testing"
@@ -22,7 +22,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	query = mixnet.NewQueryClient(conn, contract)
+	query = mixnet.New(conn, contract)
 }
 
 func TestQueryClient_Contract_GetAdmin(t *testing.T) {

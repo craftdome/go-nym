@@ -1,4 +1,4 @@
-module client
+module wsc
 
 go 1.24.0
 

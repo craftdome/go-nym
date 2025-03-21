@@ -6,9 +6,11 @@ use (
 	./clients/nymnode
 	./contracts/mixnet
 	./examples/clients/wsc
+	./examples/clients/nymapi
 	./examples/clients/nymnode
 	./examples/contracts/mixnet
-	./libs/uint128
-	./libs/version
-	./libs/successgroup
+	./pkg/uint128
+	./pkg/version
+	./pkg/successgroup
+	./pkg/contracts
 )

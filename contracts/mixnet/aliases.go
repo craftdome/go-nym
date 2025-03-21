@@ -1,11 +1,11 @@
 package mixnet
 
 import (
-	"github.com/craftdome/go-nym/contracts/mixnet/models"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/delegations"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/intervals"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/nodes"
 	"github.com/craftdome/go-nym/contracts/mixnet/query/rewards"
+	"github.com/craftdome/go-nym/pkg/contracts/mixnet/models"
 )
 
 // contract-related
@@ -71,6 +71,7 @@ type EstimateDelegatorRewardParams = rewards.EstimateDelegatorRewardParams
 
 // intervals-related
 
+type NumberOfPendingEvents = models.NumberOfPendingEvents
 type PendingEpochEvents = models.PendingEpochEvents
 type PendingEpochEvent = models.PendingEpochEvent
 type PendingIntervalEvents = models.PendingIntervalEvents

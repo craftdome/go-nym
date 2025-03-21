@@ -2,10 +2,16 @@ package models
 
 import (
 	"fmt"
+	"strconv"
 	"uint128"
 )
 
 type NodeID uint32
+
+func (n NodeID) String() string {
+	return strconv.FormatUint(uint64(n), 10)
+}
+
 type BlockHeight uint64
 type IdentityKey string
 

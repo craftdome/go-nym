@@ -1,7 +1,7 @@
-package api
+package nymnode
 
 const (
-	EndpointTemplate = "http://%s:%d/api/v1/%s"
+	EndpointTemplate = "http://%s/api/v1/%s"
 
 	// Node
 	EndpointAuxiliaryDetails  = "auxiliary-details"

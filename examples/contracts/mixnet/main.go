@@ -20,7 +20,7 @@ func main() {
 	}
 
 	// Creating contract client
-	client := mixnet.NewQueryClient(conn, contract)
+	client := mixnet.New(conn, contract)
 
 	ctx := context.Background()
 

@@ -2,10 +2,10 @@ package delegations
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/contracts/mixnet/models"
+	"github.com/craftdome/go-nym/pkg/contracts/mixnet/models"
 )
 
-func (c *Client) GetByNode(ctx context.Context, params GetNodeDelegationsParams) (*models.PagedNodeDelegations, error) {
+func (c *Client) GetByNode(ctx context.Context, params GetNodeDelegationsParams) (models.PagedNodeDelegations, error) {
 	type req struct {
 		MethodParams GetNodeDelegationsParams `json:"get_node_delegations"`
 	}
@@ -13,11 +13,10 @@ func (c *Client) GetByNode(ctx context.Context, params GetNodeDelegationsParams)
 	r := req{MethodParams: params}
 	r.MethodParams.Limit = min(r.MethodParams.Limit, models.DelegationPageMaxRetrievalLimit)
 
-	var result models.PagedNodeDelegations
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PagedNodeDelegations](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetByDelegator(ctx context.Context, params GetDelegatorDelegationsParams) (*models.PagedDelegatorDelegations, error) {
+func (c *Client) GetByDelegator(ctx context.Context, params GetDelegatorDelegationsParams) (models.PagedDelegatorDelegations, error) {
 	type req struct {
 		MethodParams GetDelegatorDelegationsParams `json:"get_delegator_delegations"`
 	}
@@ -25,22 +24,20 @@ func (c *Client) GetByDelegator(ctx context.Context, params GetDelegatorDelegati
 	r := req{MethodParams: params}
 	r.MethodParams.Limit = min(r.MethodParams.Limit, models.DelegationPageMaxRetrievalLimit)
 
-	var result models.PagedDelegatorDelegations
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PagedDelegatorDelegations](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetByNodeAndDelegator(ctx context.Context, params GetNodeDelegationParams) (*models.DelegatorNodeDelegation, error) {
+func (c *Client) GetByNodeAndDelegator(ctx context.Context, params GetNodeDelegationParams) (models.DelegatorNodeDelegation, error) {
 	type req struct {
 		MethodParams GetNodeDelegationParams `json:"get_delegation_details"`
 	}
 
 	r := req{MethodParams: params}
 
-	var result models.DelegatorNodeDelegation
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.DelegatorNodeDelegation](ctx, c.client, c.contract, r)
 }
 
-func (c *Client) GetAll(ctx context.Context, params GetDelegationsParams) (*models.PagedAllDelegations, error) {
+func (c *Client) GetAll(ctx context.Context, params GetDelegationsParams) (models.PagedAllDelegations, error) {
 	type req struct {
 		MethodParams GetDelegationsParams `json:"get_all_delegations"`
 	}
@@ -48,6 +45,5 @@ func (c *Client) GetAll(ctx context.Context, params GetDelegationsParams) (*mode
 	r := req{MethodParams: params}
 	r.MethodParams.Limit = min(r.MethodParams.Limit, models.DelegationPageMaxRetrievalLimit)
 
-	var result models.PagedAllDelegations
-	return &result, c.reader.Read(ctx, r, &result)
+	return Query[models.PagedAllDelegations](ctx, c.client, c.contract, r)
 }
