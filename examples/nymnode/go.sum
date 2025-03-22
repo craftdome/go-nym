@@ -1,0 +1,6 @@
+github.com/craftdome/go-nym/clients/nymnode v0.0.0-20250321071031-9c8d5ae8c041 h1:gC4LWTF7BqEyK3jswIqVBUln1JxP4eh2WDRJrTSqgHs=
+github.com/craftdome/go-nym/clients/nymnode v0.0.0-20250321071031-9c8d5ae8c041/go.mod h1:wPpayJvsqrDb+kx4FmRtWWUPokNXR8JO05u3If2YdC4=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+golang.org/x/time v0.11.0 h1:/bpjEDfN9tkoN/ryeYHnv5hcMlc8ncjMcM4XBk5NWV0=
+golang.org/x/time v0.11.0/go.mod h1:CDIdPxbZBQxdj6cxyCIdrNogrJKMJ7pr37NYpMcMDSg=

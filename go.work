@@ -1,14 +1,13 @@
 go 1.24.0
 
 use (
-	./clients/wsc
-	./clients/nymapi
-	./clients/nymnode
-	./contracts/mixnet
-	./examples/clients/wsc
-	./examples/clients/nymnode
-	./examples/contracts/mixnet
-	./libs/uint128
-	./libs/version
-	./libs/successgroup
+	./examples/mixnet
+	./examples/nymapi
+	./examples/nymnode
+	./examples/wsc
+	./mixnet
+	./nymapi
+	./nymnode
+	./pkg
+	./wsc
 )

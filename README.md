@@ -1,15 +1,17 @@
 # Supported implementations
 
-- [clients/wsc readme](https://github.com/craftdome/go-nym/blob/dev/clients/wsc/README.md) (Go 1.24)
-- [clients/nymnode readme](https://github.com/craftdome/go-nym/blob/dev/clients/nymnode/README.md) (Go 1.24)
-- [contracts/mixnet readme](https://github.com/craftdome/go-nym/blob/dev/contracts/mixnet/README.md) (Go 1.24)
+- [wsc readme](https://github.com/craftdome/go-nym/blob/dev/wsc/README.md) (Go 1.24)
+- [nymnode readme](https://github.com/craftdome/go-nym/blob/dev/nymnode/README.md) (Go 1.24)
+- [nymapi readme](https://github.com/craftdome/go-nym/blob/dev/nymapi/README.md) (Go 1.24)
+- [mixnet readme](https://github.com/craftdome/go-nym/blob/dev/mixnet/README.md) (Go 1.24)
 
 # Installation
 
 ```bash
-go get github.com/craftdome/go-nym/clients/wsc@v1.0.2
-go get github.com/craftdome/go-nym/clients/nymnode@v1.7.0
-go get github.com/craftdome/go-nym/contracts/mixnet@v1.5.1-rc3
+go get github.com/craftdome/go-nym/wsc@v1.0.2
+go get github.com/craftdome/go-nym/nymnode@v1.7.0-rc5
+go get github.com/craftdome/go-nym/nymapi@v1.1.54-rc5
+go get github.com/craftdome/go-nym/mixnet@v1.5.1-rc6
 ```
 
 # Support the developer (Nodes)
