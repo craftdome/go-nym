@@ -2,7 +2,7 @@ package nymnode
 
 type MixnetWebsockets struct {
 	WsPort  uint16 `json:"ws_port"`
-	WssPort uint16 `json:"wss_port,omitempty"`
+	WssPort uint16 `json:"wss_port"`
 }
 
 type Wireguard struct {
@@ -11,12 +11,12 @@ type Wireguard struct {
 }
 
 type ClientInterfaces struct {
-	MixnetWebsockets `json:"mixnet_websockets,omitempty"`
-	Wireguard        `json:"wireguard,omitempty"`
+	MixnetWebsockets `json:"mixnet_websockets"`
+	Wireguard        `json:"wireguard"`
 }
 
 type Gateway struct {
-	ClientInterfaces `json:"client_interfaces,omitempty"`
+	ClientInterfaces `json:"client_interfaces"`
 
 	EnforcesZKNyms bool `json:"enforces_zk_nyms"`
 }
@@ -55,8 +55,8 @@ type PrometheusMetrics string
 type AuxiliaryDetails struct {
 	Location      string `json:"location"`
 	AnnouncePorts struct {
-		VerlocPort uint16 `json:"verloc_port,omitempty"`
-		MixPort    uint16 `json:"mix_port,omitempty"`
+		VerlocPort uint16 `json:"verloc_port"`
+		MixPort    uint16 `json:"mix_port"`
 	} `json:"announce_ports"`
 	AcceptedOperatorTermsAndConditions bool `json:"accepted_operator_terms_and_conditions"`
 }
@@ -88,7 +88,7 @@ type HostInformation struct {
 		Keys     struct {
 			ED25519Identity string `json:"ed25519_identity"`
 			X25519Sphinx    string `json:"x25519_sphinx"`
-			X25519Noise     string `json:"x25519_noise,omitempty"`
+			X25519Noise     string `json:"x25519_noise"`
 		} `json:"keys"`
 	} `json:"data"`
 	Signature string `json:"signature"`
@@ -127,10 +127,10 @@ type SystemInformation struct {
 type PolicyAction string
 
 const (
-	Accept  PolicyAction = "accept"
-	Reject  PolicyAction = "reject"
-	Accept6 PolicyAction = "accept6"
-	Reject6 PolicyAction = "reject6"
+	AcceptPolicy  PolicyAction = "accept"
+	RejectPolicy  PolicyAction = "reject"
+	Accept6Policy PolicyAction = "accept6"
+	Reject6Policy PolicyAction = "reject6"
 )
 
 type NetworkRequester struct {

@@ -1,5 +1,7 @@
 package nymapi
 
+import "github.com/craftdome/go-nym/pkg/types"
+
 type BuildInformation struct {
 	BinaryName      string `json:"binary_name"`
 	BuildTimestamp  string `json:"build_timestamp"`
@@ -20,7 +22,7 @@ type Health struct {
 }
 
 type NodeAnnotation struct {
-	NodeID     uint32 `json:"node_id"`
+	NodeID     types.NodeID `json:"node_id"`
 	Annotation struct {
 		Last24hPerformance  float32 `json:"last_24h_performance,string"`
 		DetailedPerformance struct {

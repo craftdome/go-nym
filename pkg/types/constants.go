@@ -1,18 +1,10 @@
-package mixnet
-
-import (
-	"github.com/craftdome/go-nym/pkg/uint128"
-	"math/big"
-)
-
-var (
-	TokenSupply                        = uint128.From64(1_000_000_000_000_000)
-	DefaultIntervalOperatingCostAmount = uint128.From64(40_000_000)
-	DefaultProfitMarginPercent         = uint64(20)
-	UnitDelegationBase                 = new(big.Int).Mul(big.NewInt(1_000_000_000), big.NewInt(1_000_000_000_000_000_000))
-)
+package types
 
 const (
+	TokenSupply                        = uint64(1_000_000_000_000_000)
+	DefaultIntervalOperatingCostAmount = uint64(40_000_000)
+	DefaultProfitMarginPercent         = uint64(20)
+
 	NymNodeBondDefaultRetrievalLimit uint32 = 50
 	NymNodeBondMaxRetrievalLimit     uint32 = 100
 

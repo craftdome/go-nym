@@ -10,7 +10,7 @@ A tool for reading data from the mixnet contract of nym.com
 
 Download:
 ```bash
-go get github.com/craftdome/go-nym/mixnet@v1.5.1-rc6
+go get github.com/craftdome/go-nym/mixnet
 ```
 
 Import:

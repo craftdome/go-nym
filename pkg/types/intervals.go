@@ -1,16 +1,8 @@
-package mixnet
+package types
 
-type IntervalEventID uint32
+type IntervalEventID = uint32
 
-func (id IntervalEventID) IsZero() bool {
-	return id == 0
-}
-
-type EpochEventID uint32
-
-func (id EpochEventID) IsZero() bool {
-	return id == 0
-}
+type EpochEventID = uint32
 
 type PendingEpochEvent struct {
 	EventID EpochEventID          `json:"event_id"`
@@ -27,12 +19,12 @@ type PendingEpochEventKind struct {
 		Owner  Addr   `json:"owner"`
 		NodeID NodeID `json:"node_id"`
 		Amount Coin   `json:"amount"`
-		Proxy  Addr   `json:"proxy,omitempty"`
+		Proxy  Addr   `json:"proxy"`
 	} `json:"delegate"`
 	Undelegate *struct {
 		Owner  Addr   `json:"owner"`
 		NodeID NodeID `json:"node_id"`
-		Proxy  Addr   `json:"proxy,omitempty"`
+		Proxy  Addr   `json:"proxy"`
 	} `json:"undelegate"`
 	NodeIncreasePledge *struct {
 		NodeID     NodeID `json:"node_id"`

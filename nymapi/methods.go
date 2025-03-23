@@ -3,7 +3,7 @@ package nymapi
 import (
 	"context"
 	"encoding/json"
-	"github.com/craftdome/go-nym/pkg/mixnet"
+	"github.com/craftdome/go-nym/pkg/types"
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
 	"net/http"
@@ -41,12 +41,12 @@ func (c *Client) Health(ctx context.Context) (Health, error) {
 	return get[Health](ctx, c.client, c.limiter, c.endpoints[EndpointHealth])
 }
 
-func (c *Client) GetNodeAnnotation(ctx context.Context, nodeID mixnet.NodeID) (NodeAnnotation, error) {
+func (c *Client) GetNodeAnnotation(ctx context.Context, nodeID types.NodeID) (NodeAnnotation, error) {
 	url := strings.Replace(c.endpoints[EndpointBuildInformation], "{node_id}", nodeID.String(), 1)
 	return get[NodeAnnotation](ctx, c.client, c.limiter, url)
 }
 
-func (c *Client) GetNodePerformance(ctx context.Context, nodeID mixnet.NodeID) (NodePerformance, error) {
+func (c *Client) GetNodePerformance(ctx context.Context, nodeID types.NodeID) (NodePerformance, error) {
 	url := strings.Replace(c.endpoints[EndpointNodePerformance], "{node_id}", nodeID.String(), 1)
 	return get[NodePerformance](ctx, c.client, c.limiter, url)
 }
