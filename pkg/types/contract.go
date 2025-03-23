@@ -1,4 +1,4 @@
-package mixnet
+package types
 
 import (
 	"encoding/json"
@@ -53,15 +53,15 @@ type ContractStateParams struct {
 			Prerelease uint32 `json:"prerelease"`
 		} `json:"version_weights"`
 		VersionScoreFormulaParams struct {
-			Penalty        Decimal `json:"penalty"`
-			PenaltyScaling Decimal `json:"penalty_scaling"`
+			Penalty        float32 `json:"penalty,string"`
+			PenaltyScaling float32 `json:"penalty_scaling,string"`
 		} `json:"version_score_formula_params"`
 	} `json:"config_score_params"`
 }
 
-type EpochID uint32
+type EpochID = uint32
 
-type IntervalID uint32
+type IntervalID = uint32
 
 type OffsetDateTime struct{ time.Time }
 
@@ -84,37 +84,30 @@ type EpochStatus struct {
 	State           EpochState `json:"state"`
 }
 
-type InProgressEpochState string
+type InProgressEpochState = string
 
 type RewardingEpochState struct {
 	LastRewarded NodeID `json:"last_rewarded"`
 	FinalNodeID  NodeID `json:"final_node_id"`
 }
-type ReconcilingEventsEpochState string
+type ReconcilingEventsEpochState = string
 
 type RoleAssignmentEpochState struct {
 	Next Role `json:"next"`
 }
 
-type epochState uint8
-
-const (
-	inProgress epochState = iota
-	rewarding
-	reconcilingEvents
-	roleAssignment
-)
-
 type EpochState struct {
-	InProgressEpochState
-	RewardingEpochState
-	ReconcilingEventsEpochState
-	RoleAssignmentEpochState
-
-	flag epochState
+	*InProgressEpochState
+	*RewardingEpochState
+	*ReconcilingEventsEpochState
+	*RoleAssignmentEpochState
 }
 
 func (es *EpochState) UnmarshalText(text []byte) error {
+	if len(text) == 0 {
+		return errors.New("empty epoch state")
+	}
+
 	// Проверяем, является ли входная data строкой
 	if text[0] != '{' {
 		s := string(text)
@@ -122,11 +115,9 @@ func (es *EpochState) UnmarshalText(text []byte) error {
 		// Обрабатываем строковое представление состояния
 		switch s {
 		case "in_progress":
-			es.InProgressEpochState = InProgressEpochState(s)
-			es.flag = inProgress
+			es.InProgressEpochState = &s
 		case "reconciling_events":
-			es.ReconcilingEventsEpochState = ReconcilingEventsEpochState(s)
-			es.flag = reconcilingEvents
+			es.ReconcilingEventsEpochState = &s
 		default:
 			return errors.New("unknown EpochState: " + string(text))
 		}
@@ -141,43 +132,25 @@ func (es *EpochState) UnmarshalText(text []byte) error {
 
 	// Проверяем возможные варианты
 	if v, ok := raw["rewarding"]; ok {
-		es.flag = rewarding
 		return json.Unmarshal(v, &es.RewardingEpochState)
 	}
 	if v, ok := raw["role_assignment"]; ok {
-		es.flag = roleAssignment
 		return json.Unmarshal(v, &es.RoleAssignmentEpochState)
 	}
 
 	return errors.New("unknown EpochState")
 }
 
-func (es *EpochState) IsInProgress() bool {
-	return es.flag == inProgress
-}
-
-func (es *EpochState) IsRewarding() bool {
-	return es.flag == rewarding
-}
-
-func (es *EpochState) IsReconcilingEvents() bool {
-	return es.flag == reconcilingEvents
-}
-
-func (es *EpochState) IsRoleAssignment() bool {
-	return es.flag == roleAssignment
-}
-
 func (es EpochState) String() string {
 	switch {
-	case es.IsInProgress():
-		return fmt.Sprintf("%q", es.InProgressEpochState)
-	case es.IsRewarding():
-		return fmt.Sprintf("%q", es.RewardingEpochState)
-	case es.IsReconcilingEvents():
-		return fmt.Sprintf("%q", es.ReconcilingEventsEpochState)
-	case es.IsRoleAssignment():
-		return fmt.Sprintf("%q", es.RoleAssignmentEpochState)
+	case es.InProgressEpochState != nil:
+		return fmt.Sprintf("%+v", es.InProgressEpochState)
+	case es.RewardingEpochState != nil:
+		return fmt.Sprintf("%+v", es.RewardingEpochState)
+	case es.ReconcilingEventsEpochState != nil:
+		return fmt.Sprintf("%+v", es.ReconcilingEventsEpochState)
+	case es.RoleAssignmentEpochState != nil:
+		return fmt.Sprintf("%+v", es.RoleAssignmentEpochState)
 	default:
 		return "<nil>"
 	}

@@ -1,23 +1,21 @@
-package mixnet
-
-import "strconv"
+package types
 
 type NodeRewardingDetails struct {
 	CostParams        NodeCostParams `json:"cost_params"`
-	Operator          Decimal        `json:"operator"`
-	Delegates         Decimal        `json:"delegates"`
-	TotalUnitReward   Decimal        `json:"total_unit_reward"`
-	UnitDelegation    Decimal        `json:"unit_delegation"`
+	Operator          Uint64         `json:"operator"`
+	Delegates         Uint64         `json:"delegates"`
+	TotalUnitReward   Uint64         `json:"total_unit_reward"`
+	UnitDelegation    Uint64         `json:"unit_delegation"`
 	LastRewardedEpoch EpochID        `json:"last_rewarded_epoch"`
 	UniqueDelegations uint32         `json:"unique_delegations"`
 }
 
 type NodeCostParams struct {
-	ProfitMarginPercent   Percent `json:"profit_margin_percent"`
+	ProfitMarginPercent   Percent `json:"profit_margin_percent,string"`
 	IntervalOperatingCost Coin    `json:"interval_operating_cost"`
 }
 
-type Role string
+type Role = string
 
 const (
 	EntryGateway Role = "eg"
@@ -27,30 +25,6 @@ const (
 	ExitGateway  Role = "xg"
 	Standby      Role = "stb"
 )
-
-func (r *Role) UnmarshalJSON(text []byte) error {
-	i, err := strconv.Atoi(string(text))
-	if err != nil {
-		return err
-	}
-
-	switch i {
-	case 0:
-		*r = EntryGateway
-	case 1:
-		*r = Layer1
-	case 2:
-		*r = Layer2
-	case 3:
-		*r = Layer3
-	case 4:
-		*r = ExitGateway
-	case 128:
-		*r = Standby
-	}
-
-	return nil
-}
 
 type RewardedSetMetadata struct {
 	EpochID              EpochID      `json:"epoch_id"`
@@ -85,13 +59,13 @@ type BondedNode struct {
 
 type Node struct {
 	Host           string      `json:"host"`
-	CustomHTTPPort uint16      `json:"custom_http_port,omitempty"`
+	CustomHTTPPort uint16      `json:"custom_http_port"`
 	IdentityKey    IdentityKey `json:"identity_key"`
 }
 
 type NodeConfigUpdate struct {
 	Host                   string `json:"host,omitempty"`
-	CustomHTTPPort         uint16 `json:"custom_http_port,omitempty"`
+	CustomHTTPPort         uint16 `json:"custom_http_port"`
 	RestoreDefaultHTTPPort bool   `json:"restore_default_http_port"`
 }
 
@@ -114,23 +88,23 @@ type DetailedByOperator struct {
 
 type NodeStakeSaturation struct {
 	NodeID             NodeID  `json:"node_id"`
-	CurrentSaturation  Decimal `json:"current_saturation"`
-	UncappedSaturation Decimal `json:"uncapped_saturation"`
+	CurrentSaturation  Percent `json:"current_saturation,string"`
+	UncappedSaturation Percent `json:"uncapped_saturation,string"`
 }
 
 type PagedUnbondedNodes struct {
 	Nodes          []UnbondedNode `json:"nodes"`
-	StartNextAfter NodeID         `json:"start_next_after,omitempty"`
+	StartNextAfter NodeID         `json:"start_next_after"`
 }
 
 type PagedBondedNodes struct {
 	Nodes          []BondedNode `json:"nodes"`
-	StartNextAfter NodeID       `json:"start_next_after,omitempty"`
+	StartNextAfter NodeID       `json:"start_next_after"`
 }
 
 type PagedDetailedNodes struct {
 	Nodes          []DetailedNode `json:"nodes"`
-	StartNextAfter NodeID         `json:"start_next_after,omitempty"`
+	StartNextAfter NodeID         `json:"start_next_after"`
 }
 
 type EpochAssignment struct {

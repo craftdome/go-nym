@@ -2,7 +2,7 @@ package mixnet_test
 
 import (
 	"github.com/craftdome/go-nym/mixnet"
-	models "github.com/craftdome/go-nym/pkg/mixnet"
+	models "github.com/craftdome/go-nym/pkg/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"testing"
@@ -173,7 +173,7 @@ func TestQueryClient_Contract_GetNodeVersionHistory(t *testing.T) {
 
 }
 
-func TestQueryClient_Contract_GetParams(t *testing.T) {
+func TestQueryClient_Contract_GetRewardingParams(t *testing.T) {
 	t.Parallel()
 	resp, err := query.Contract.GetRewardingParams(t.Context())
 	if err != nil {
@@ -181,7 +181,7 @@ func TestQueryClient_Contract_GetParams(t *testing.T) {
 	}
 	t.Logf("%+v\n", resp)
 
-	if f, _ := resp.Interval.SybilResistance.Float32(); f == 0 {
+	if f := resp.Interval.SybilResistance; f == 0 {
 		t.Errorf("want Interval.SybilResistance.Float32 != 0, got %f", f)
 	}
 }
@@ -415,7 +415,7 @@ func TestQueryClient_Nodes_GetDetailedByOwner(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if f, _ := got.RewardingDetails.CostParams.ProfitMarginPercent.Float32(); f < 0.2 || f > 0.5 {
+		if f := got.RewardingDetails.CostParams.ProfitMarginPercent; f < 0.2 || f > 0.5 {
 			t.Errorf("want RewardingDetails.CostParams.ProfitMarginPercent = [0.2, 0.5], got %v", f)
 		}
 	})
@@ -434,7 +434,7 @@ func TestQueryClient_Nodes_GetDetailed(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if f, _ := got.RewardingDetails.CostParams.ProfitMarginPercent.Float32(); f < 0.2 || f > 0.5 {
+		if f := got.RewardingDetails.CostParams.ProfitMarginPercent; f < 0.2 || f > 0.5 {
 			t.Errorf("want RewardingDetails.CostParams.ProfitMarginPercent = [0.2, 0.5], got %v", f)
 		}
 	})
@@ -453,7 +453,7 @@ func TestQueryClient_Nodes_GetDetailedByIdentityKey(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if f, _ := got.RewardingDetails.CostParams.ProfitMarginPercent.Float32(); f < 0.2 || f > 0.5 {
+		if f := got.RewardingDetails.CostParams.ProfitMarginPercent; f < 0.2 || f > 0.5 {
 			t.Errorf("want RewardingDetails.CostParams.ProfitMarginPercent = [0.2, 0.5], got %v", f)
 		}
 	})
@@ -472,7 +472,7 @@ func TestQueryClient_Nodes_GetRewardingDetails(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if f, _ := got.CostParams.ProfitMarginPercent.Float32(); f < 0.2 || f > 0.5 {
+		if f := got.CostParams.ProfitMarginPercent; f < 0.2 || f > 0.5 {
 			t.Errorf("want CostParams.ProfitMarginPercent = [0.2, 0.5], got %v", f)
 		}
 	})
@@ -673,7 +673,7 @@ func TestQueryClient_Delegations_GetAll(t *testing.T) {
 				t.Errorf("got height %d, want > 0", got.Delegations[0].Height)
 			}
 
-			if got.Delegations[0].Amount.IsZero() {
+			if got.Delegations[0].Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 		}
@@ -691,7 +691,7 @@ func TestQueryClient_Delegations_GetAll(t *testing.T) {
 		t.Logf("%+v", got)
 
 		if len(got.Delegations) > 0 {
-			if got.Delegations[0].Amount.IsZero() {
+			if got.Delegations[0].Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 
@@ -743,7 +743,7 @@ func TestQueryClient_Delegations_GetByNode(t *testing.T) {
 				t.Errorf("got node_id %d, want %d", got.Delegations[0].NodeID, params.NodeID)
 			}
 
-			if got.Delegations[0].Amount.IsZero() {
+			if got.Delegations[0].Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 
@@ -778,7 +778,7 @@ func TestQueryClient_Delegations_GetByDelegator(t *testing.T) {
 				t.Errorf("got owner %s, want %s", got.Delegations[0].Owner, params.Delegator)
 			}
 
-			if got.Delegations[0].Amount.IsZero() {
+			if got.Delegations[0].Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 
@@ -804,7 +804,7 @@ func TestQueryClient_Delegations_GetByDelegator(t *testing.T) {
 				t.Errorf("got owner %s, want %s", got.Delegations[0].Owner, params.Delegator)
 			}
 
-			if got.Delegations[0].Amount.IsZero() {
+			if got.Delegations[0].Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 
@@ -857,7 +857,7 @@ func TestQueryClient_Delegations_GetByNodeAndDelegator(t *testing.T) {
 				t.Errorf("got node_id %d, want %d", got.Delegation.NodeID, params.NodeID)
 			}
 
-			if got.Delegation.Amount.IsZero() {
+			if got.Delegation.Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 
@@ -885,7 +885,7 @@ func TestQueryClient_Rewards_GetPendingByOwner(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if got.AmountEarned.IsZero() {
+		if got.AmountEarned.Amount == 0 {
 			t.Errorf("got zero amount, want > 0")
 		}
 	})
@@ -904,7 +904,7 @@ func TestQueryClient_Rewards_GetPendingByNode(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if got.AmountEarned.IsZero() {
+		if got.AmountEarned.Amount == 0 {
 			t.Errorf("got zero amount, want > 0")
 		}
 	})
@@ -924,7 +924,7 @@ func TestQueryClient_Rewards_GetPendingByNodeAndDelegator(t *testing.T) {
 		}
 		t.Logf("%+v", got)
 
-		if got.AmountEarned.IsZero() {
+		if got.AmountEarned.Amount == 0 {
 			t.Errorf("got zero amount, want > 0")
 		}
 	})
@@ -1002,7 +1002,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 				t.Errorf("got zero owner, want not empty")
 			}
 
-			if kind.Delegate.Amount.IsZero() {
+			if kind.Delegate.Amount.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 		case kind.Undelegate != nil:
@@ -1018,7 +1018,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 				t.Errorf("got zero node_id, want > 0")
 			}
 
-			if kind.NodeIncreasePledge.IncreaseBy.IsZero() {
+			if kind.NodeIncreasePledge.IncreaseBy.Amount == 0 {
 				t.Errorf("got zero amount, want > 0")
 			}
 		case kind.NodeDecreasePledge != nil:
@@ -1026,7 +1026,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 				t.Errorf("got zero node_id, want > 0")
 			}
 
-			if kind.NodeDecreasePledge.DecreaseBy.IsZero() {
+			if kind.NodeDecreasePledge.DecreaseBy.Amount == 0 {
 				t.Errorf("got zero decrease_by, want > 0")
 			}
 		case kind.UpdateActiveSet != nil:
@@ -1045,7 +1045,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 			t.Errorf("unknown kind: %+v", kind)
 		}
 
-		if got.StartNextAfter.IsZero() {
+		if got.StartNextAfter == 0 {
 			return
 		}
 
@@ -1062,7 +1062,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 			t.Logf("%+v", got)
 
 			i += len(got.Events)
-			if !got.StartNextAfter.IsZero() {
+			if got.StartNextAfter != 0 {
 				params.StartAfter = got.StartNextAfter
 				goto loop
 			}
@@ -1104,8 +1104,8 @@ func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 				t.Errorf("got zero node_id, want > 0")
 			}
 
-			if kind.ChangeNodeCostParams.NewCosts.IntervalOperatingCost.IsZero() &&
-				kind.ChangeNodeCostParams.NewCosts.ProfitMarginPercent.IsZero() {
+			if kind.ChangeNodeCostParams.NewCosts.IntervalOperatingCost.Amount == 0 &&
+				kind.ChangeNodeCostParams.NewCosts.ProfitMarginPercent == 0 {
 				t.Errorf("got zero interval_operating_cost && profit_margin_percent both, want > 0 at once")
 			}
 		case kind.UpdateIntervalConfig != nil:
@@ -1117,11 +1117,11 @@ func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 				t.Errorf("got %d epoch duration, want 3600", kind.UpdateIntervalConfig.EpochDurationSecs)
 			}
 		case kind.UpdateRewardingParams != nil:
-			if kind.UpdateRewardingParams.Update.SybilResistancePercent.IsZero() {
+			if kind.UpdateRewardingParams.Update.SybilResistancePercent == 0 {
 				t.Errorf("got zero update_sybil_resistance_percent, want > 0")
 			}
 
-			if kind.UpdateRewardingParams.Update.RewardPool.IsZero() {
+			if kind.UpdateRewardingParams.Update.RewardPool == 0 {
 				t.Errorf("got zero reward_pool, want > 0")
 			}
 
@@ -1137,26 +1137,26 @@ func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 				t.Errorf("got zero rewarded_set_mixnodes, want > 0")
 			}
 
-			if kind.UpdateRewardingParams.Update.IntervalPoolEmission.IsZero() {
+			if kind.UpdateRewardingParams.Update.IntervalPoolEmission == 0 {
 				t.Errorf("got zero interval_pool_emission, want > 0")
 			}
 
-			if kind.UpdateRewardingParams.Update.ActiveSetWorkFactor.IsZero() {
+			if kind.UpdateRewardingParams.Update.ActiveSetWorkFactor == 0 {
 				t.Errorf("got zero active_set_work_factor, want > 0")
 			}
 
-			if kind.UpdateRewardingParams.Update.StakingSupplyScaleFactor.IsZero() {
+			if kind.UpdateRewardingParams.Update.StakingSupplyScaleFactor == 0 {
 				t.Errorf("got zero staking_supply_scale_factor, want > 0")
 			}
 
-			if kind.UpdateRewardingParams.Update.StakingSupply.IsZero() {
+			if kind.UpdateRewardingParams.Update.StakingSupply == 0 {
 				t.Errorf("got zero staking_supply, want > 0")
 			}
 		default:
 			t.Errorf("unknown kind: %+v", kind)
 		}
 
-		if got.StartNextAfter.IsZero() {
+		if got.StartNextAfter == 0 {
 			return
 		}
 
@@ -1173,7 +1173,7 @@ func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 			t.Logf("%+v", got)
 
 			i += len(got.Events)
-			if !got.StartNextAfter.IsZero() {
+			if got.StartNextAfter != 0 {
 				params.StartAfter = got.StartNextAfter
 				goto loop
 			}
