@@ -8,10 +8,10 @@
 # Installation
 
 ```bash
-go get github.com/craftdome/go-nym/wsc@v1.0.2
-go get github.com/craftdome/go-nym/nymnode@v1.7.0-rc5
-go get github.com/craftdome/go-nym/nymapi@v1.1.54-rc5
-go get github.com/craftdome/go-nym/mixnet@v1.5.1-rc6
+go get github.com/craftdome/go-nym/wsc
+go get github.com/craftdome/go-nym/nymnode
+go get github.com/craftdome/go-nym/nymapi
+go get github.com/craftdome/go-nym/mixnet
 ```
 
 # Support the developer (Nodes)

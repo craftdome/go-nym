@@ -10,7 +10,7 @@ A client implementation of nym-node API
 
 Download:
 ```bash
-go get github.com/craftdome/go-nym/nymapi@v1.1.54-rc5
+go get github.com/craftdome/go-nym/nymapi
 ```
 
 Import:
