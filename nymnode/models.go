@@ -1,5 +1,7 @@
 package nymnode
 
+const DefaultHTTPPort = 8080
+
 type MixnetWebsockets struct {
 	WsPort  uint16 `json:"ws_port"`
 	WssPort uint16 `json:"wss_port"`
