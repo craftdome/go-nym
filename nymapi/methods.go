@@ -42,7 +42,7 @@ func (c *Client) Health(ctx context.Context) (Health, error) {
 }
 
 func (c *Client) GetNodeAnnotation(ctx context.Context, nodeID types.NodeID) (NodeAnnotation, error) {
-	url := strings.Replace(c.endpoints[EndpointBuildInformation], "{node_id}", nodeID.String(), 1)
+	url := strings.Replace(c.endpoints[EndpointNodeAnnotation], "{node_id}", nodeID.String(), 1)
 	return get[NodeAnnotation](ctx, c.client, c.limiter, url)
 }
 
