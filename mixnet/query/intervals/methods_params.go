@@ -5,12 +5,12 @@ import (
 )
 
 type GetPendingEpochEventsParams struct {
-	StartAfter types.EpochEventID `json:"start_after,omitzero"`
+	StartAfter types.EpochEventID `json:"start_after,omitempty"`
 	Limit      uint32             `json:"limit,omitempty"`
 }
 
 type GetPendingIntervalEventsParams struct {
-	StartAfter types.IntervalEventID `json:"start_after,omitzero"`
+	StartAfter types.IntervalEventID `json:"start_after,omitempty"`
 	Limit      uint32                `json:"limit,omitempty"`
 }
 

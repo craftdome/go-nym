@@ -6,7 +6,7 @@ import (
 
 type GetNodeDelegationsParams struct {
 	NodeID     types.NodeID `json:"node_id"`
-	StartAfter types.Addr   `json:"start_after,omitzero"`
+	StartAfter types.Addr   `json:"start_after,omitempty"`
 	Limit      uint32       `json:"limit,omitempty"`
 }
 
