@@ -18,7 +18,7 @@ This library is designed to simplify interaction with the NYM protocol for [nym-
 
 Download:
 ```
-go get github.com/craftdome/go-nym/wsc@v1.0.2
+go get github.com/craftdome/go-nym/wsc
 ```
 
 Import:
