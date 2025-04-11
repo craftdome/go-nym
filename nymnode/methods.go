@@ -36,10 +36,6 @@ func (c *Client) GetAuxiliaryDetails(ctx context.Context) (AuxiliaryDetails, err
 	return get[AuxiliaryDetails](ctx, c.client, c.limiter, c.endpoints[EndpointAuxiliaryDetails])
 }
 
-func (c *Client) GetBuildInformation(ctx context.Context) (BuildInformation, error) {
-	return get[BuildInformation](ctx, c.client, c.limiter, c.endpoints[EndpointBuildInformation])
-}
-
 func (c *Client) GetDescription(ctx context.Context) (Description, error) {
 	return get[Description](ctx, c.client, c.limiter, c.endpoints[EndpointDescription])
 }

@@ -33,10 +33,6 @@ func get[T any](ctx context.Context, client *http.Client, limiter *rate.Limiter,
 	return result, json.NewDecoder(resp.Body).Decode(&result)
 }
 
-func (c *Client) GetBuildInformation(ctx context.Context) (BuildInformation, error) {
-	return get[BuildInformation](ctx, c.client, c.limiter, c.endpoints[EndpointBuildInformation])
-}
-
 func (c *Client) Health(ctx context.Context) (Health, error) {
 	return get[Health](ctx, c.client, c.limiter, c.endpoints[EndpointHealth])
 }

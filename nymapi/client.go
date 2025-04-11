@@ -21,6 +21,8 @@ type Client struct {
 	limiter *rate.Limiter
 
 	endpoints map[string]string
+
+	BuildInformation BuildInformation
 }
 
 func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
@@ -38,10 +40,12 @@ func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
 		opt(c)
 	}
 
-	info, err := c.GetBuildInformation(ctx)
+	info, err := c.getBuildInformation(ctx)
 	if err != nil {
 		return nil, err
 	}
+
+	c.BuildInformation = info
 
 	v, err := version.Parse(info.BuildVersion)
 	if err != nil {
@@ -53,4 +57,8 @@ func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
 	}
 
 	return c, nil
+}
+
+func (c *Client) getBuildInformation(ctx context.Context) (BuildInformation, error) {
+	return get[BuildInformation](ctx, c.client, c.limiter, c.endpoints[EndpointBuildInformation])
 }

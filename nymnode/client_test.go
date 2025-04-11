@@ -35,11 +35,7 @@ func TestClient(t *testing.T) {
 
 	t.Run("Node GetBuildInformation", func(t *testing.T) {
 		t.Parallel()
-		info, err := c.GetBuildInformation(t.Context())
-		if err != nil {
-			t.Error(err)
-		}
-		t.Logf("%+v", info)
+		t.Logf("%+v", c.BuildInformation)
 	})
 
 	t.Run("Node GetDescription", func(t *testing.T) {

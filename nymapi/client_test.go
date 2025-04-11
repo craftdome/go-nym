@@ -26,11 +26,8 @@ func TestClient(t *testing.T) {
 
 	t.Run("GetBuildInformation", func(t *testing.T) {
 		t.Parallel()
-		res, err := c.GetBuildInformation(t.Context())
-		if err != nil {
-			t.Fatal(err)
-		}
-		t.Logf("%+v", res)
+
+		t.Logf("%+v", c.BuildInformation)
 	})
 
 	t.Run("Health", func(t *testing.T) {
