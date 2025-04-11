@@ -49,7 +49,7 @@ func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
 	}
 
 	if v < v131 {
-		return nil, ErrUnsupportedNodeVersion
+		return nil, errors.Wrapf(ErrUnsupportedNodeVersion, "%s < %s", v, v131)
 	}
 
 	return c, nil

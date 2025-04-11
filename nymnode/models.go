@@ -107,6 +107,7 @@ type SystemInformation struct {
 	SystemName    string `json:"system_name"`
 	KernelVersion string `json:"kernel_version"`
 	OSVersion     string `json:"os_version"`
+	CPUArch       string `json:"cpu_arch"`
 	Hardware      struct {
 		CPU []struct {
 			Brand     string `json:"brand"`
