@@ -60,6 +60,15 @@ func TestClient(t *testing.T) {
 		t.Logf("%+v", info)
 	})
 
+	t.Run("Node GetLoad", func(t *testing.T) {
+		t.Parallel()
+		load, err := c.GetLoad(t.Context())
+		if err != nil {
+			t.Error(err)
+		}
+		t.Logf("%+v", load)
+	})
+
 	t.Run("Node GetRoles", func(t *testing.T) {
 		t.Parallel()
 		info, err := c.GetRoles(t.Context())

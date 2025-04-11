@@ -48,6 +48,10 @@ func (c *Client) GetHostInformation(ctx context.Context) (HostInformation, error
 	return get[HostInformation](ctx, c.client, c.limiter, c.endpoints[EndpointHostInformation])
 }
 
+func (c *Client) GetLoad(ctx context.Context) (Load, error) {
+	return get[Load](ctx, c.client, c.limiter, c.endpoints[EndpointLoad])
+}
+
 func (c *Client) GetRoles(ctx context.Context) (Roles, error) {
 	return get[Roles](ctx, c.client, c.limiter, c.endpoints[EndpointRoles])
 }

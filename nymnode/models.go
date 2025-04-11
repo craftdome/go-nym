@@ -96,6 +96,12 @@ type HostInformation struct {
 	Signature string `json:"signature"`
 }
 
+type Load struct {
+	Total   string `json:"total"`
+	Machine string `json:"machine"`
+	Network string `json:"network"`
+}
+
 type Roles struct {
 	MixnodeEnabled          bool `json:"mixnode_enabled"`
 	GatewayEnabled          bool `json:"gateway_enabled"`

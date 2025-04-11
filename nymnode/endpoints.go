@@ -8,6 +8,7 @@ const (
 	EndpointBuildInformation  = "build-information"
 	EndpointDescription       = "description"
 	EndpointHostInformation   = "host-information"
+	EndpointLoad              = "load"
 	EndpointRoles             = "roles"
 	EndpointSystemInformation = "system-info"
 
@@ -38,6 +39,7 @@ var (
 		EndpointBuildInformation,
 		EndpointDescription,
 		EndpointHostInformation,
+		EndpointLoad,
 		EndpointRoles,
 		EndpointSystemInformation,
 
