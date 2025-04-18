@@ -19,14 +19,14 @@ type GetUnbondedParams struct {
 }
 
 type GetAllUnbondedParams struct {
-	StartAfter types.NodeID `json:"start_after,omitempty"`
-	Limit      uint32       `json:"limit,omitempty"`
+	StartAfter types.NodeID `json:"limit,omitempty"` // contract misspell: limit <-> start_after
+	Limit      uint32       `json:"start_after,omitempty"`
 }
 
 type GetUnbondedByOwnerParams struct {
 	Owner      types.Addr   `json:"owner"`
-	StartAfter types.NodeID `json:"start_after,omitempty"`
-	Limit      uint32       `json:"limit,omitempty"`
+	StartAfter types.NodeID `json:"limit,omitempty"` // contract misspell: limit <-> start_after
+	Limit      uint32       `json:"start_after,omitempty"`
 }
 
 type GetUnbondedByIdentityKeyParams struct {

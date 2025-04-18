@@ -336,10 +336,9 @@ func TestQueryClient_Nodes_GetAllUnbonded(t *testing.T) {
 		}
 		t.Logf("len: %d, start_next_after: %d\n", len(got.Nodes), got.StartNextAfter)
 
-		// Doesn't work in outside
-		//if len(got.Nodes) > 0 && got.Nodes[0].NodeID <= params.StartAfter {
-		//	t.Errorf("got.Nodes[0].NodeID = %v, want gt %v (start_next_after)", got.Nodes[0].NodeID, params.StartAfter)
-		//}
+		if len(got.Nodes) > 0 && got.Nodes[0].NodeID <= params.StartAfter {
+			t.Errorf("got.Nodes[0].NodeID = %v, want gt %v (start_next_after)", got.Nodes[0].NodeID, params.StartAfter)
+		}
 	})
 }
 
@@ -366,10 +365,9 @@ func TestQueryClient_Nodes_GetUnbondedByOperator(t *testing.T) {
 		}
 		t.Logf("len: %d, start_next_after: %d\n", len(got.Nodes), got.StartNextAfter)
 
-		// Doesn't work in outside
-		//if len(got.Nodes) > 0 && got.Nodes[0].NodeID <= params.StartAfter {
-		//	t.Errorf("got.Nodes[0].NodeID = %v, want gt %v (start_next_after)", got.Nodes[0].NodeID, params.StartAfter)
-		//}
+		if len(got.Nodes) > 0 && got.Nodes[0].NodeID <= params.StartAfter {
+			t.Errorf("got.Nodes[0].NodeID = %v, want gt %v (start_next_after)", got.Nodes[0].NodeID, params.StartAfter)
+		}
 	})
 }
 

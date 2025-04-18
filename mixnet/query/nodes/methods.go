@@ -56,7 +56,6 @@ func (c *Client) GetUnbonded(ctx context.Context, params GetUnbondedParams) (typ
 	return *resp.Details, nil
 }
 
-// TODO start_after and limit dont work
 func (c *Client) GetAllUnbonded(ctx context.Context, params GetAllUnbondedParams) (types.PagedUnbondedNodes, error) {
 	type req struct {
 		MethodParams GetAllUnbondedParams `json:"get_unbonded_nym_nodes_paged"`
@@ -68,7 +67,6 @@ func (c *Client) GetAllUnbonded(ctx context.Context, params GetAllUnbondedParams
 	return Query[types.PagedUnbondedNodes](ctx, c.client, c.contract, r)
 }
 
-// TODO start_next_after, limit do not work
 func (c *Client) GetUnbondedByOwner(ctx context.Context, params GetUnbondedByOwnerParams) (types.PagedUnbondedNodes, error) {
 	type req struct {
 		MethodParams GetUnbondedByOwnerParams `json:"get_unbonded_nym_nodes_by_owner_paged"`
