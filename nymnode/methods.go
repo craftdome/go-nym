@@ -44,6 +44,8 @@ func (c *Client) GetHostInformation(ctx context.Context) (HostInformation, error
 	return get[HostInformation](ctx, c.client, c.limiter, c.endpoints[EndpointHostInformation])
 }
 
+// GetLoad
+// available since v1.5.0
 func (c *Client) GetLoad(ctx context.Context) (Load, error) {
 	endpoint := c.endpoints[EndpointLoad]
 	if c.Version < v150 {
