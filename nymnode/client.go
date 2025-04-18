@@ -12,6 +12,7 @@ import (
 // Minimum supported API Versions
 var (
 	v131 = version.MustParse("1.3.1")
+	v150 = version.MustParse("1.5.0")
 )
 
 var ErrUnsupportedNodeVersion = errors.New("unsupported node version")
@@ -23,6 +24,7 @@ type Client struct {
 	endpoints map[string]string
 
 	BuildInformation BuildInformation
+	Version          version.Version
 }
 
 func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
@@ -53,8 +55,10 @@ func New(ctx context.Context, host string, opts ...Option) (*Client, error) {
 	}
 
 	if v < v131 {
-		return nil, errors.Wrapf(ErrUnsupportedNodeVersion, "%s < %s", v, v131)
+		return nil, errors.Wrapf(ErrUnsupportedNodeVersion, "current=%s < %s", v, v131)
 	}
+
+	c.Version = v
 
 	return c, nil
 }

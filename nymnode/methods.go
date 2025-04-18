@@ -45,6 +45,10 @@ func (c *Client) GetHostInformation(ctx context.Context) (HostInformation, error
 }
 
 func (c *Client) GetLoad(ctx context.Context) (Load, error) {
+	if c.Version < v150 {
+		return Load{}, errors.Wrapf(ErrUnsupportedNodeVersion, "current=%s < %s", c.Version, v150)
+	}
+
 	return get[Load](ctx, c.client, c.limiter, c.endpoints[EndpointLoad])
 }
 
