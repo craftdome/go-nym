@@ -2,7 +2,7 @@ package mixnet_test
 
 import (
 	"github.com/craftdome/go-nym/mixnet"
-	models "github.com/craftdome/go-nym/pkg/types"
+	"github.com/craftdome/go-nym/pkg/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"testing"
@@ -499,7 +499,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 	t.Parallel()
 	t.Run("Valid Layer1", func(t *testing.T) {
 		params := mixnet.GetEpochAssignmentByRoleParams{
-			Role: models.Layer1,
+			Role: types.Layer1,
 		}
 
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -530,7 +530,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 
 	t.Run("Valid Layer2", func(t *testing.T) {
 		params := mixnet.GetEpochAssignmentByRoleParams{
-			Role: models.Layer2,
+			Role: types.Layer2,
 		}
 
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -550,7 +550,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 
 	t.Run("Valid Layer3", func(t *testing.T) {
 		params := mixnet.GetEpochAssignmentByRoleParams{
-			Role: models.Layer3,
+			Role: types.Layer3,
 		}
 
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -570,7 +570,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 
 	t.Run("Valid EntryGateway", func(t *testing.T) {
 		params := mixnet.GetEpochAssignmentByRoleParams{
-			Role: models.EntryGateway,
+			Role: types.EntryGateway,
 		}
 
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -590,7 +590,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentByRole(t *testing.T) {
 
 	t.Run("Valid ExitGateway", func(t *testing.T) {
 		params := mixnet.GetEpochAssignmentByRoleParams{
-			Role: models.ExitGateway,
+			Role: types.ExitGateway,
 		}
 
 		got, err := query.Nodes.GetEpochAssignmentByRole(t.Context(), params)
@@ -651,7 +651,7 @@ func TestQueryClient_Nodes_GetEpochAssignmentMetadata(t *testing.T) {
 func TestQueryClient_Delegations_GetAll(t *testing.T) {
 	t.Parallel()
 	params := mixnet.GetDelegationsParams{
-		//StartAfter: models.StorageKey{V1: 1, V2: "n18ds90dz0ezjy9a059k8zamrj7q2u98c9yq9th4"},
+		//StartAfter: types.StorageKey{V1: 1, V2: "n18ds90dz0ezjy9a059k8zamrj7q2u98c9yq9th4"},
 		Limit: 1,
 	}
 
@@ -699,7 +699,7 @@ func TestQueryClient_Delegations_GetAll(t *testing.T) {
 		}
 
 		if got.StartNextAfter != nil {
-			params.Limit = models.DelegationPageMaxRetrievalLimit
+			params.Limit = types.DelegationPageMaxRetrievalLimit
 			params.StartAfter = got.StartNextAfter
 
 			t.Run("Valid with StartNextAfter", func(t *testing.T) {
@@ -760,7 +760,7 @@ func TestQueryClient_Delegations_GetByDelegator(t *testing.T) {
 	t.Parallel()
 	params := mixnet.GetDelegatorDelegationsParams{
 		Delegator: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw",
-		//StartAfter: models.StorageKey{V1: 21, V2: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw"},
+		//StartAfter: types.StorageKey{V1: 21, V2: "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw"},
 		Limit: 1,
 	}
 
@@ -812,7 +812,7 @@ func TestQueryClient_Delegations_GetByDelegator(t *testing.T) {
 		}
 
 		if got.StartNextAfter != nil {
-			params.Limit = models.DelegationPageDefaultRetrievalLimit
+			params.Limit = types.DelegationPageDefaultRetrievalLimit
 			params.StartAfter = got.StartNextAfter
 
 			t.Run("Valid with StartNextAfter", func(t *testing.T) {
@@ -1050,7 +1050,7 @@ func TestQueryClient_Intervals_GetPendingEpochEvents(t *testing.T) {
 		params.StartAfter = got.StartNextAfter
 
 		t.Run("Valid", func(t *testing.T) {
-			params.Limit = models.EpochEventsMaxRetrievalLimit
+			params.Limit = types.EpochEventsMaxRetrievalLimit
 			var i int
 		loop:
 			got, err := query.Intervals.GetPendingEpochEvents(t.Context(), params)
@@ -1161,7 +1161,7 @@ func TestQueryClient_Intervals_GetPendingIntervalEvents(t *testing.T) {
 		params.StartAfter = got.StartNextAfter
 
 		t.Run("Valid", func(t *testing.T) {
-			params.Limit = models.IntervalEventsMaxRetrievalLimit
+			params.Limit = types.IntervalEventsMaxRetrievalLimit
 			var i int
 		loop:
 			got, err := query.Intervals.GetPendingIntervalEvents(t.Context(), params)
