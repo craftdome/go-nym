@@ -15,11 +15,6 @@ var (
 	v150 = version.MustParse("1.5.0")
 )
 
-var (
-	ErrUnsupportedNodeVersion = errors.New("unsupported node version")
-	ErrUnsupportedNodeMethod  = errors.New("unsupported node method")
-)
-
 type Client struct {
 	client  *http.Client
 	limiter *rate.Limiter

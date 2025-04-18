@@ -25,11 +25,14 @@ func get[T any](ctx context.Context, client *http.Client, limiter *rate.Limiter,
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	switch resp.StatusCode {
+	case http.StatusOK:
+		return result, json.NewDecoder(resp.Body).Decode(&result)
+	case http.StatusForbidden:
+		return result, errors.Wrap(ErrForbiddenNodeMethod, url)
+	default:
 		return result, errors.Errorf("%s -> %s", url, resp.Status)
 	}
-
-	return result, json.NewDecoder(resp.Body).Decode(&result)
 }
 
 func (c *Client) GetAuxiliaryDetails(ctx context.Context) (AuxiliaryDetails, error) {
