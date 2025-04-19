@@ -81,22 +81,26 @@ type PendingIntervalEventKind struct {
 	} `json:"update_interval_config"`
 }
 
+type EpochEvent struct {
+	ID    EpochEventID          `json:"id"`
+	Event PendingEpochEventData `json:"event"`
+}
+
 type PendingEpochEvents struct {
-	SecondsUntilExecutable int64 `json:"seconds_until_executable"`
-	Events                 []struct {
-		ID    EpochEventID          `json:"id"`
-		Event PendingEpochEventData `json:"event"`
-	} `json:"events"`
-	StartNextAfter EpochEventID `json:"start_next_after"`
+	SecondsUntilExecutable int64        `json:"seconds_until_executable"`
+	Events                 []EpochEvent `json:"events"`
+	StartNextAfter         EpochEventID `json:"start_next_after"`
+}
+
+type IntervalEvent struct {
+	ID    IntervalEventID          `json:"id"`
+	Event PendingIntervalEventData `json:"event"`
 }
 
 type PendingIntervalEvents struct {
-	SecondsUntilExecutable int64 `json:"seconds_until_executable"`
-	Events                 []struct {
-		ID    IntervalEventID          `json:"id"`
-		Event PendingIntervalEventData `json:"event"`
-	} `json:"events"`
-	StartNextAfter IntervalEventID `json:"start_next_after"`
+	SecondsUntilExecutable int64           `json:"seconds_until_executable"`
+	Events                 []IntervalEvent `json:"events"`
+	StartNextAfter         IntervalEventID `json:"start_next_after"`
 }
 
 type NumberOfPendingEvents struct {
