@@ -2,6 +2,11 @@ package types
 
 import "github.com/barweiss/go-tuple"
 
+const (
+	DelegationProgramAddress Addr = "n1rnxpdpx3kldygsklfft0gech7fhfcux4zst5lw"
+	NymVPNSellsAddress       Addr = "n13lvxc7dujstmqk7lygen84gf37zf3rsygful0q"
+)
+
 type OwnerProxySubKey = Addr
 
 type StorageKey = tuple.T2[NodeID, Addr]
