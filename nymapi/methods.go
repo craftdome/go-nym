@@ -7,6 +7,7 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -38,11 +39,17 @@ func (c *Client) Health(ctx context.Context) (Health, error) {
 }
 
 func (c *Client) GetNodeAnnotation(ctx context.Context, nodeID types.NodeID) (NodeAnnotation, error) {
-	url := strings.Replace(c.endpoints[EndpointNodeAnnotation], "{node_id}", nodeID.String(), 1)
+	url := strings.Replace(c.endpoints[EndpointNodeAnnotation], "{node_id}",
+		strconv.FormatUint(uint64(nodeID), 10),
+		1,
+	)
 	return get[NodeAnnotation](ctx, c.client, c.limiter, url)
 }
 
 func (c *Client) GetNodePerformance(ctx context.Context, nodeID types.NodeID) (NodePerformance, error) {
-	url := strings.Replace(c.endpoints[EndpointNodePerformance], "{node_id}", nodeID.String(), 1)
+	url := strings.Replace(c.endpoints[EndpointNodePerformance], "{node_id}",
+		strconv.FormatUint(uint64(nodeID), 10),
+		1,
+	)
 	return get[NodePerformance](ctx, c.client, c.limiter, url)
 }

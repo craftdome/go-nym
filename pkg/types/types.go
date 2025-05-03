@@ -2,15 +2,9 @@ package types
 
 import (
 	"fmt"
-	"strconv"
 )
 
-type NodeID uint32
-
-func (n NodeID) String() string {
-	return strconv.FormatUint(uint64(n), 10)
-}
-
+type NodeID = uint32
 type BlockHeight = uint64
 type IdentityKey = string
 
