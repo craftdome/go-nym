@@ -2,6 +2,7 @@ package intervals
 
 import (
 	"context"
+
 	"github.com/craftdome/go-nym/pkg/types"
 )
 

@@ -25,10 +25,11 @@ package main
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/nymnode"
-	"golang.org/x/time/rate"
 	"log"
 	"net/http"
+
+	"github.com/craftdome/go-nym/nymnode"
+	"golang.org/x/time/rate"
 )
 
 func main() {
@@ -63,4 +64,4 @@ func main() {
 
 In the list below you will find developer's nodes. If you are looking for stake your funds, you can take a closer look at my options.
 
-Nymesis Explorer: https://nymesis.vercel.app/?q=3826
+Nymesis Explorer: https://nymesis.vercel.app/?q=.123

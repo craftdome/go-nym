@@ -2,14 +2,16 @@ package mixnet
 
 import (
 	"context"
+
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	"google.golang.org/grpc"
+
 	"github.com/craftdome/go-nym/mixnet/query/contract"
 	"github.com/craftdome/go-nym/mixnet/query/delegations"
 	"github.com/craftdome/go-nym/mixnet/query/intervals"
 	"github.com/craftdome/go-nym/mixnet/query/nodes"
 	"github.com/craftdome/go-nym/mixnet/query/rewards"
 	"github.com/craftdome/go-nym/pkg/types"
-	"google.golang.org/grpc"
 )
 
 type Contract interface {

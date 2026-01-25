@@ -2,8 +2,10 @@ package nodes
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/pkg/types"
+
 	"github.com/pkg/errors"
+
+	"github.com/craftdome/go-nym/pkg/types"
 )
 
 var (

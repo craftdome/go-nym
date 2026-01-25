@@ -3,10 +3,12 @@ package nymapi
 import (
 	"context"
 	"fmt"
-	"github.com/craftdome/go-nym/pkg/version"
+	"net/http"
+
 	"github.com/pkg/errors"
 	"golang.org/x/time/rate"
-	"net/http"
+
+	"github.com/craftdome/go-nym/pkg/version"
 )
 
 // Minimum supported API Versions

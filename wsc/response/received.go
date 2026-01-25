@@ -2,8 +2,9 @@ package response
 
 import (
 	"encoding/json"
-	"github.com/craftdome/go-nym/wsc/tags"
 	"io"
+
+	"github.com/craftdome/go-nym/wsc/tags"
 )
 
 type Received struct {

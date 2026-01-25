@@ -3,12 +3,14 @@ package nymapi
 import (
 	"context"
 	"encoding/json"
-	"github.com/craftdome/go-nym/pkg/types"
-	"github.com/pkg/errors"
-	"golang.org/x/time/rate"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/pkg/errors"
+	"golang.org/x/time/rate"
+
+	"github.com/craftdome/go-nym/pkg/types"
 )
 
 func get[T any](ctx context.Context, client *http.Client, limiter *rate.Limiter, url string) (result T, err error) {

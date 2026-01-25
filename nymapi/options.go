@@ -1,8 +1,9 @@
 package nymapi
 
 import (
-	"golang.org/x/time/rate"
 	"net/http"
+
+	"golang.org/x/time/rate"
 )
 
 type Option func(*Client)

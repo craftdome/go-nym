@@ -1,9 +1,9 @@
 # Supported implementations
 
-- [wsc readme](https://github.com/craftdome/go-nym/blob/dev/wsc/README.md) (Go 1.24)
-- [nymnode readme](https://github.com/craftdome/go-nym/blob/dev/nymnode/README.md) (Go 1.24)
-- [nymapi readme](https://github.com/craftdome/go-nym/blob/dev/nymapi/README.md) (Go 1.24)
-- [mixnet readme](https://github.com/craftdome/go-nym/blob/dev/mixnet/README.md) (Go 1.24)
+- [wsc readme](https://github.com/craftdome/go-nym/blob/dev/wsc/README.md) (Go 1.25)
+- [nymnode readme](https://github.com/craftdome/go-nym/blob/dev/nymnode/README.md) (Go 1.25)
+- [nymapi readme](https://github.com/craftdome/go-nym/blob/dev/nymapi/README.md) (Go 1.25)
+- [mixnet readme](https://github.com/craftdome/go-nym/blob/dev/mixnet/README.md) (Go 1.25)
 
 # Installation
 

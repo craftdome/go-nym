@@ -1,8 +1,9 @@
 package nymapi_test
 
 import (
-	"github.com/craftdome/go-nym/nymapi"
 	"testing"
+
+	"github.com/craftdome/go-nym/nymapi"
 )
 
 const (

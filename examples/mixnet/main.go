@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/mixnet"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+
+	"github.com/craftdome/go-nym/mixnet"
 )
 
 func main() {

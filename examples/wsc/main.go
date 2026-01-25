@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+
 	"github.com/craftdome/go-nym/wsc"
 	"github.com/craftdome/go-nym/wsc/response"
 	"github.com/craftdome/go-nym/wsc/tags"
-	"os"
-	"os/signal"
 )
 
 var (

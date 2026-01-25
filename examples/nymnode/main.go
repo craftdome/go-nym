@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
-	"github.com/craftdome/go-nym/nymnode"
-	"golang.org/x/time/rate"
 	"log"
 	"net/http"
+
+	"golang.org/x/time/rate"
+
+	"github.com/craftdome/go-nym/nymnode"
 )
 
 func main() {

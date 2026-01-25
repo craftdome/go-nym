@@ -2,10 +2,11 @@ package wsc
 
 import (
 	"fmt"
-	"github.com/gorilla/websocket"
-	"github.com/pkg/errors"
 	"os"
 	"time"
+
+	"github.com/gorilla/websocket"
+	"github.com/pkg/errors"
 )
 
 type Client struct {

@@ -1,11 +1,13 @@
 package wsc
 
 import (
+	"io"
+
+	"github.com/pkg/errors"
+
 	"github.com/craftdome/go-nym/wsc/request"
 	"github.com/craftdome/go-nym/wsc/response"
 	"github.com/craftdome/go-nym/wsc/tags"
-	"github.com/pkg/errors"
-	"io"
 )
 
 type Request interface {

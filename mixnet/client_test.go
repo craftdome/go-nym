@@ -1,11 +1,13 @@
 package mixnet_test
 
 import (
-	"github.com/craftdome/go-nym/mixnet"
-	"github.com/craftdome/go-nym/pkg/types"
+	"testing"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"testing"
+
+	"github.com/craftdome/go-nym/mixnet"
+	"github.com/craftdome/go-nym/pkg/types"
 )
 
 const (

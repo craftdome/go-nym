@@ -1,8 +1,9 @@
 package nymnode_test
 
 import (
-	"github.com/craftdome/go-nym/nymnode"
 	"testing"
+
+	"github.com/craftdome/go-nym/nymnode"
 )
 
 const (

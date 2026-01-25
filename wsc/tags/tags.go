@@ -2,6 +2,7 @@ package tags
 
 import (
 	"encoding/json"
+
 	"github.com/pkg/errors"
 )
 

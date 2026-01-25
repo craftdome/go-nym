@@ -2,6 +2,7 @@ package request
 
 import (
 	"encoding/json"
+
 	"github.com/craftdome/go-nym/wsc/tags"
 )
 

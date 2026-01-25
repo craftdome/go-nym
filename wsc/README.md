@@ -41,11 +41,12 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+
 	"github.com/craftdome/go-nym/wsc"
 	"github.com/craftdome/go-nym/wsc/response"
 	"github.com/craftdome/go-nym/wsc/tags"
-	"os"
-	"os/signal"
 )
 
 var (
@@ -135,4 +136,4 @@ func main() {
 
 In the list below you will find developer's nodes. If you are looking for stake your funds, you can take a closer look at my options.
 
-Nymesis Explorer: https://nymesis.vercel.app/?q=3826
+Nymesis Explorer: https://nymesis.vercel.app/?q=.123

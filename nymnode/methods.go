@@ -3,10 +3,11 @@ package nymnode
 import (
 	"context"
 	"encoding/json"
-	"github.com/pkg/errors"
-	"golang.org/x/time/rate"
 	"io"
 	"net/http"
+
+	"github.com/pkg/errors"
+	"golang.org/x/time/rate"
 )
 
 func get[T any](ctx context.Context, client *http.Client, limiter *rate.Limiter, url string) (result T, err error) {

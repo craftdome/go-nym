@@ -3,6 +3,7 @@ package nodes
 import (
 	"context"
 	"encoding/json"
+
 	"github.com/CosmWasm/wasmd/x/wasm/types"
 )
 
