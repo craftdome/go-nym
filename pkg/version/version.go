@@ -33,7 +33,8 @@ func Parse(s string) (v Version, err error) {
 		return v, err
 	}
 
-	patch, err := strconv.ParseUint(pieces[2], 10, 16)
+	patchNumber, _, _ := strings.Cut(pieces[2], "-")
+	patch, err := strconv.ParseUint(patchNumber, 10, 16)
 	if err != nil {
 		return v, err
 	}
